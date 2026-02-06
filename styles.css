@@ -1,0 +1,50 @@
+.portfolio {
+  background: linear-gradient(45deg, #f3ec78, #af4261);
+}
+
+.skill-card {
+  perspective: 1000px;
+}
+
+.card {
+  width: 300px;
+  height: 200px;
+  transform: rotateY(0deg);
+  transition: transform 0.5s;
+}
+
+.card:hover {
+  transform: rotateY(20deg);
+}
+
+.timeline {
+  position: relative;
+  padding: 10px 0;
+}
+
+.experience {
+  position: relative;
+  margin: 20px 0;
+}
+
+.project-card {
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: transform 0.3s;
+}
+
+.project-card:hover {
+  transform: scale(1.05);
+}
+
+.feedback-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.feedback-form input, .feedback-form textarea {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
