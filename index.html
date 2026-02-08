@@ -3,101 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Devansh - Data Analysis & AI Portfolio</title>
+    <title>Devansh Jain - Data Analysis & AI Portfolio</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <span class="logo-text">Devansh<span class="logo-dot">.</span></span>
+            </div>
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#publications" class="nav-link">Publications</a></li>
+                <li><a href="#certifications" class="nav-link">Certifications</a></li>
+                <li><a href="#feedback" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
     <!-- Header Section -->
-    <header class="hero-section">
+    <header class="hero-section" id="home">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+        </div>
         <div class="container">
             <div class="hero-content">
-                <div class="hero-left">
+                <div class="hero-left" data-aos="fade-right">
                     <div class="profile-image-wrapper">
-                        <img src="Profile Image.jpeg" alt="Devansh Profile" class="profile-image" id="profileImage">
+                        <img src="https://via.placeholder.com/300" alt="Devansh Profile" class="profile-image" id="profileImage">
                         <div class="image-glow"></div>
                     </div>
                 </div>
-                <div class="hero-right">
-                    <h1 class="hero-title">Hi, I'm <span class="highlight">Devansh</span></h1>
+                <div class="hero-right" data-aos="fade-left">
+                    <h1 class="hero-title">Hi, I'm <span class="highlight">Devansh Jain</span></h1>
                     <h2 class="hero-subtitle">Data Analysis and AI Learner</h2>
-                    <p class="hero-description">Passionate about transforming data into insights and building intelligent solutions</p>
+                    <p class="hero-description">Passionate about transforming data into insights and building intelligent solutions for healthcare innovation</p>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">3+</span>
+                            <span class="stat-label">Projects</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">1</span>
+                            <span class="stat-label">Publication</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">7+</span>
+                            <span class="stat-label">Skills</span>
+                        </div>
+                    </div>
                     <div class="cta-buttons">
                         <a href="mailto:djdevansh.2305@gmail.com" class="btn btn-primary">
                             <i class="fas fa-envelope"></i> EMAIL ME
                         </a>
-                        <a href="Resume_DevanshJain.pdf" download class="btn btn-secondary">
+                        <a href="./resume.pdf" download class="btn btn-secondary">
                             <i class="fas fa-download"></i> DOWNLOAD CV
                         </a>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="scroll-indicator">
+            <a href="#skills">
+                <div class="mouse"></div>
+                <span>Scroll Down</span>
+            </a>
+        </div>
     </header>
 
     <!-- Technical Skills Section -->
-    <section class="skills-section">
+    <section class="skills-section" id="skills">
         <div class="container">
-            <h2 class="section-title">Technical Skills & Tools</h2>
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">What I Do</span>
+                <h2 class="section-title">Technical Skills & Tools</h2>
+                <p class="section-subtitle">Technologies I work with to bring ideas to life</p>
+            </div>
             <div class="skills-grid">
-                <div class="skill-card" data-skill="python">
+                <div class="skill-card" data-skill="python" data-aos="zoom-in" data-aos-delay="100">
                     <div class="skill-icon">
                         <i class="fab fa-python"></i>
                     </div>
                     <h3>Python</h3>
+                    <div class="skill-progress">
+                        <div class="progress-bar" style="width: 90%"></div>
+                    </div>
                 </div>
-                <div class="skill-card" data-skill="sql">
+                <div class="skill-card" data-skill="sql" data-aos="zoom-in" data-aos-delay="150">
                     <div class="skill-icon">
                         <i class="fas fa-database"></i>
                     </div>
                     <h3>SQL</h3>
+                    <div class="skill-progress">
+                        <div class="progress-bar" style="width: 85%"></div>
+                    </div>
                 </div>
-                <div class="skill-card" data-skill="excel">
+                <div class="skill-card" data-skill="excel" data-aos="zoom-in" data-aos-delay="200">
                     <div class="skill-icon">
                         <i class="fas fa-file-excel"></i>
                     </div>
                     <h3>Excel</h3>
+                    <div class="skill-progress">
+                        <div class="progress-bar" style="width: 88%"></div>
+                    </div>
                 </div>
-                <div class="skill-card" data-skill="powerbi">
+                <div class="skill-card" data-skill="powerbi" data-aos="zoom-in" data-aos-delay="250">
                     <div class="skill-icon">
                         <i class="fas fa-chart-line"></i>
                     </div>
                     <h3>Power BI</h3>
+                    <div class="skill-progress">
+                        <div class="progress-bar" style="width: 92%"></div>
+                    </div>
                 </div>
-                <div class="skill-card" data-skill="supabase">
+                <div class="skill-card" data-skill="supabase" data-aos="zoom-in" data-aos-delay="300">
                     <div class="skill-icon">
                         <i class="fas fa-server"></i>
                     </div>
                     <h3>Supabase</h3>
+                    <div class="skill-progress">
+                        <div class="progress-bar" style="width: 80%"></div>
+                    </div>
                 </div>
-                <div class="skill-card" data-skill="firebase">
+                <div class="skill-card" data-skill="firebase" data-aos="zoom-in" data-aos-delay="350">
                     <div class="skill-icon">
                         <i class="fab fa-google"></i>
                     </div>
                     <h3>Firebase</h3>
+                    <div class="skill-progress">
+                        <div class="progress-bar" style="width: 83%"></div>
+                    </div>
                 </div>
-                <div class="skill-card" data-skill="react">
+                <div class="skill-card" data-skill="react" data-aos="zoom-in" data-aos-delay="400">
                     <div class="skill-icon">
                         <i class="fab fa-react"></i>
                     </div>
                     <h3>React</h3>
+                    <div class="skill-progress">
+                        <div class="progress-bar" style="width: 87%"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Experience Section -->
-    <section class="experience-section">
+    <section class="experience-section" id="experience">
         <div class="container">
-            <h2 class="section-title">Professional Experience</h2>
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Career Path</span>
+                <h2 class="section-title">Professional Experience</h2>
+                <p class="section-subtitle">My journey in data analytics and AI</p>
+            </div>
             <div class="timeline">
-                <div class="timeline-item">
+                <div class="timeline-item" data-aos="fade-right">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
                         <h3>Data Analyst Intern</h3>
                         <span class="timeline-date">June 2025 - August 2025</span>
                         <ul class="timeline-description">
                             <li>Analyzed large datasets using Python and SQL to derive actionable insights</li>
+                            <li>Created interactive dashboards in Power BI for stakeholder reporting</li>
                             <li>Implemented data cleaning and preprocessing workflows</li>
                             <li>Collaborated with cross-functional teams to optimize data-driven decisions</li>
                         </ul>
@@ -108,17 +187,27 @@
     </section>
 
     <!-- Projects Section -->
-    <section class="projects-section">
+    <section class="projects-section" id="projects">
         <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Portfolio</span>
+                <h2 class="section-title">Featured Projects</h2>
+                <p class="section-subtitle">Innovative solutions powered by AI and data</p>
+            </div>
             <div class="projects-grid">
                 <!-- ShopLink Project -->
-                <div class="project-card">
+                <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="project-number">01</div>
                     <div class="project-header">
                         <h3>ShopLink</h3>
-                        <span class="project-date">Jan 2026 - Present</span>
+                        <span class="project-date">2024 - 2025</span>
                     </div>
                     <p class="project-brief">E-commerce platform with real-time inventory management</p>
+                    <div class="project-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">Firebase</span>
+                        <span class="tag">Supabase</span>
+                    </div>
                     <div class="project-buttons">
                         <a href="https://github.com/Devansh2305-code/ShopLink" target="_blank" class="btn btn-small btn-primary">
                             <i class="fab fa-github"></i> Source
@@ -130,12 +219,18 @@
                 </div>
 
                 <!-- AI Resume Checker Project -->
-                <div class="project-card">
+                <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="project-number">02</div>
                     <div class="project-header">
                         <h3>AI Resume Checker</h3>
-                        <span class="project-date">Dec 2025</span>
+                        <span class="project-date">2024</span>
                     </div>
                     <p class="project-brief">AI-powered resume analysis and optimization tool</p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">NLP</span>
+                        <span class="tag">TensorFlow</span>
+                    </div>
                     <div class="project-buttons">
                         <a href="https://github.com/Devansh2305-code/AI-Resume-Checker" target="_blank" class="btn btn-small btn-primary">
                             <i class="fab fa-github"></i> Source
@@ -147,14 +242,20 @@
                 </div>
 
                 <!-- AI Voice Assistant Project -->
-                <div class="project-card">
+                <div class="project-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="project-number">03</div>
                     <div class="project-header">
                         <h3>AI Voice Assistant</h3>
-                        <span class="project-date">Dec 2025</span>
+                        <span class="project-date">2023 - 2024</span>
                     </div>
                     <p class="project-brief">Intelligent voice-activated personal assistant</p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Speech Recognition</span>
+                        <span class="tag">OpenAI</span>
+                    </div>
                     <div class="project-buttons">
-                        <a href="https://github.com/Devansh2305-code/Voice-AI-Assistant" target="_blank" class="btn btn-small btn-primary">
+                        <a href="https://github.com/Devansh2305-code/AI-Voice-Assistant" target="_blank" class="btn btn-small btn-primary">
                             <i class="fab fa-github"></i> Source
                         </a>
                         <button class="btn btn-small btn-secondary view-more-btn" data-project="voice">
@@ -166,11 +267,111 @@
         </div>
     </section>
 
-    <!-- Feedback Section -->
-    <section class="feedback-section">
+    <!-- Publications Section -->
+    <section class="publications-section" id="publications">
         <div class="container">
-            <h2 class="section-title">Share Your Feedback</h2>
-            <form class="feedback-form" id="feedbackForm">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Research</span>
+                <h2 class="section-title">Publications</h2>
+                <p class="section-subtitle">Contributing to the advancement of AI in healthcare</p>
+            </div>
+            <div class="publications-container">
+                <div class="publication-card" data-aos="fade-up">
+                    <div class="publication-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="publication-content">
+                        <span class="publication-badge">Research Paper</span>
+                        <h3 class="publication-title">AI Powered Skin Disease Detector</h3>
+                        <p class="publication-authors">
+                            <i class="fas fa-users"></i> 
+                            <strong>Devansh Jain</strong> & Tanmay Dixit
+                        </p>
+                        <p class="publication-journal">
+                            <i class="fas fa-book"></i> 
+                            International Journal of Research and Publication Reviews (IJRPR)
+                        </p>
+                        <p class="publication-description">
+                            This research explores the potential of artificial intelligence in revolutionizing skin disease detection, 
+                            contributing to the growing body of research in AI-powered healthcare solutions.
+                        </p>
+                        <div class="publication-meta">
+                            <span class="meta-item">
+                                <i class="fas fa-calendar-alt"></i> 2024
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-university"></i> K.R. Mangalam University
+                            </span>
+                        </div>
+                        <div class="publication-acknowledgment">
+                            <p><em>Guided by: Dr. Pankaj Agarwal, Dean, SOET, K.R. Mangalam University</em></p>
+                        </div>
+                        <div class="publication-actions">
+                            <a href="https://lnkd.in/drU_9Swc" target="_blank" class="btn btn-primary">
+                                <i class="fas fa-external-link-alt"></i> Read Paper
+                            </a>
+                            <button class="btn btn-secondary share-btn">
+                                <i class="fas fa-share-alt"></i> Share
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section class="certifications-section" id="certifications">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Achievements</span>
+                <h2 class="section-title">Certifications</h2>
+                <p class="section-subtitle">Continuous learning and professional development</p>
+            </div>
+            <div class="certifications-grid">
+                <div class="certification-card" data-aos="flip-left">
+                    <div class="cert-badge">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <div class="cert-image">
+                        <i class="fas fa-chart-bar cert-icon"></i>
+                    </div>
+                    <div class="cert-content">
+                        <h3>30-Days Power BI Micro Course</h3>
+                        <p class="cert-issuer">
+                            <i class="fas fa-building"></i> Skill Course E-Learning Platform
+                        </p>
+                        <p class="cert-instructor">
+                            <i class="fas fa-chalkboard-teacher"></i> Instructor: Satish Dhawale
+                        </p>
+                        <p class="cert-date">
+                            <i class="fas fa-calendar-check"></i> Completed: January 17, 2025
+                        </p>
+                        <div class="cert-skills">
+                            <span class="skill-tag">Power BI</span>
+                            <span class="skill-tag">Data Visualization</span>
+                            <span class="skill-tag">Business Intelligence</span>
+                        </div>
+                        <div class="cert-verification">
+                            <span class="verified">
+                                <i class="fas fa-check-circle"></i> ISO 9001:2015 Certified
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feedback Section -->
+    <section class="feedback-section" id="feedback">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Get In Touch</span>
+                <h2 class="section-title">Share Your Feedback</h2>
+                <p class="section-subtitle">I'd love to hear from you!</p>
+            </div>
+            <form class="feedback-form" id="feedbackForm" data-aos="fade-up">
                 <div class="form-group">
                     <label for="name">Your Name</label>
                     <input type="text" id="name" name="name" required placeholder="Enter your name">
@@ -189,10 +390,27 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2026 Devansh. All rights reserved.</p>
-            <div class="social-links">
-                <a href="https://github.com/Devansh2305-code" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://linkedin.com/in/yourprofile" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <div class="footer-content">
+                <div class="footer-left">
+                    <h3>Devansh Jain</h3>
+                    <p>Data Analyst | AI Enthusiast | Researcher</p>
+                </div>
+                <div class="footer-right">
+                    <div class="social-links">
+                        <a href="https://github.com/Devansh2305-code" target="_blank" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/yourprofile" target="_blank" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="mailto:djdevansh.2305@gmail.com" aria-label="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Devansh Jain. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -205,6 +423,11 @@
             <div id="modalDescription"></div>
         </div>
     </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <script src="script.js"></script>
 </body>
