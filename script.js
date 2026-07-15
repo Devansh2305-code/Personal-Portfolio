@@ -6,7 +6,7 @@ const navMenu = document.getElementById('navMenu');
 
 // Navbar scroll effect
 window.addEventListener('scroll', () => {
-    if (window.scrollY > 100) {
+    if (window.scrollY > 80) {
         navbar.classList.add('scrolled');
     } else {
         navbar.classList.remove('scrolled');
@@ -14,43 +14,49 @@ window.addEventListener('scroll', () => {
 });
 
 // Mobile Navigation Toggle
-navToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-});
+if (navToggle && navMenu) {
+    navToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        navToggle.classList.toggle('active');
+    });
+}
 
 // Close mobile menu when clicking on a link
 navLinks.forEach(link => {
     link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
+        if (navMenu && navToggle) {
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+        }
     });
 });
 
 // Active Navigation Link on Scroll
-const sections = document.querySelectorAll('section');
-
+const sections = document.querySelectorAll('section, header');
 function setActiveLink() {
-    let currentSection = '';
+    let currentSection = 'home';
     
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.clientHeight;
         
-        if (window.pageYOffset >= sectionTop - 200) {
-            currentSection = section.getAttribute('id');
+        if (window.pageYOffset >= sectionTop - 150) {
+            currentSection = section.getAttribute('id') || 'home';
         }
     });
     
     navLinks.forEach(link => {
         link.classList.remove('active');
-        if (link.getAttribute('href') === `#${currentSection}`) {
+        const href = link.getAttribute('href');
+        if (href === `#${currentSection}` || (currentSection === 'home' && href === '#home')) {
             link.classList.add('active');
         }
     });
 }
-
 window.addEventListener('scroll', setActiveLink);
+setActiveLink();
 
-// Profile Image Upload/Change
+// Profile Image Upload/Change Simulator
 const profileImage = document.getElementById('profileImage');
 if (profileImage) {
     profileImage.addEventListener('click', () => {
@@ -71,340 +77,451 @@ if (profileImage) {
     });
 }
 
-// Project Modal
+// Subtitle Auto-Typing Effect
+const subtitleElement = document.querySelector('.hero-subtitle');
+if (subtitleElement) {
+    const roles = ["Data Analyst", "AI Enthusiast", "Research Scholar", "Problem Solver"];
+    let roleIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let typingSpeed = 100;
+
+    function typeRoles() {
+        const currentRole = roles[roleIndex];
+        
+        if (isDeleting) {
+            subtitleElement.innerHTML = currentRole.substring(0, charIndex - 1) + '<span class="logo-dot">_</span>';
+            charIndex--;
+            typingSpeed = 50;
+        } else {
+            subtitleElement.innerHTML = currentRole.substring(0, charIndex + 1) + '<span class="logo-dot">_</span>';
+            charIndex++;
+            typingSpeed = 100;
+        }
+
+        if (!isDeleting && charIndex === currentRole.length) {
+            isDeleting = true;
+            typingSpeed = 2000; // Pause at full word
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            roleIndex = (roleIndex + 1) % roles.length;
+            typingSpeed = 500; // Pause before typing next word
+        }
+
+        setTimeout(typeRoles, typingSpeed);
+    }
+    
+    // Start typing on load
+    window.addEventListener('DOMContentLoaded', () => {
+        setTimeout(typeRoles, 1000);
+    });
+}
+
+// Project Dynamic Card Spotlight Glare Effect
+const projectCards = document.querySelectorAll('.project-card');
+projectCards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+        
+        // Dynamic border highlight style helper
+        card.style.boxShadow = `0 15px 35px rgba(99, 102, 241, 0.15), radial-gradient(800px circle at ${x}px ${y}px, rgba(255,255,255,0.06), transparent 40%)`;
+    });
+    
+    card.addEventListener('mouseleave', () => {
+        card.style.boxShadow = '';
+    });
+});
+
+// Dynamic Project Filtering
+const filterButtons = document.querySelectorAll('.filter-btn');
+filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        // Active status classes
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        
+        const filterValue = button.getAttribute('data-filter');
+        
+        projectCards.forEach(card => {
+            const cardCategory = card.getAttribute('data-category');
+            
+            if (filterValue === 'all' || cardCategory === filterValue) {
+                card.style.display = 'flex';
+                // Trigger reflow for transition
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'scale(1)';
+                }, 50);
+            } else {
+                card.style.opacity = '0';
+                card.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    card.style.display = 'none';
+                }, 300);
+            }
+        });
+    });
+});
+
+// Project Modal Detailed Profiles
 const modal = document.getElementById('projectModal');
 const closeModal = document.querySelector('.close-modal');
 const viewMoreBtns = document.querySelectorAll('.view-more-btn');
 
 const projectDetails = {
-    shoplink: {
-        title: 'ShopLink - E-commerce Platform',
+    'bi-dashboard': {
+        title: 'BI Dashboard Builder',
         description: `
             <h3>Project Overview</h3>
-            <p>ShopLink is a comprehensive e-commerce platform with real-time inventory management, designed to streamline online shopping experiences.</p>
+            <p>An automated business intelligence tool designed to bridge the gap between raw unstructured spreadsheets and interactive business analysis dashboards. Ideal for organizations seeking instant visualization assets without complex configurations.</p>
             
             <h4>Key Features</h4>
             <ul>
-                <li>Real-time inventory tracking and management</li>
-                <li>User authentication and authorization with Firebase</li>
-                <li>Responsive design for mobile and desktop</li>
-                <li>Shopping cart and checkout functionality</li>
-                <li>Product search and filtering</li>
-                <li>Admin dashboard for managing products</li>
-                <li>Integration with Supabase for database management</li>
+                <li><strong>CSV / Excel Ingestion:</strong> Drag-and-drop raw records interface supporting custom table schemas.</li>
+                <li><strong>Automated Data Sanitizer:</strong> Detects and standardizes dates, addresses null records, matches values, and structures attributes.</li>
+                <li><strong>Dynamic Analytics Sandbox:</strong> Instantly generates key summaries, correlation coefficients, and trend charts.</li>
+                <li><strong>Responsive Dashboard Panel:</strong> High-performance chart filters to view breakdowns by dates, tags, and parameters.</li>
             </ul>
             
             <h4>Technologies Used</h4>
             <ul>
-                <li>React.js for frontend development</li>
-                <li>Firebase for authentication and hosting</li>
-                <li>Supabase for database management</li>
-                <li>CSS3 for styling and animations</li>
-                <li>RESTful API integration</li>
+                <li>TypeScript & HTML5 Canvas Engines</li>
+                <li>Pandas & NumPy ETL processing logic (mocked client-side)</li>
+                <li>ChartJS & D3 visualization layers</li>
+                <li>Vanilla CSS Custom Property systems</li>
             </ul>
-            
-            <h4>Challenges & Solutions</h4>
-            <p>One of the main challenges was implementing real-time inventory updates. This was solved by leveraging Supabase's real-time subscriptions to ensure data consistency across all users.</p>
         `
     },
-    resume: {
+    'skin-detector': {
+        title: 'AI Skin Disease Detector',
+        description: `
+            <h3>Project Overview</h3>
+            <p>An advanced computer vision diagnostic model developed to assist users, particularly in underserved regions, in scanning and evaluating dermatological conditions. Supported by publication findings in the <em>International Journal of Research and Publication Reviews (IJRPR)</em>.</p>
+            
+            <h4>Key Features</h4>
+            <ul>
+                <li><strong>Computer Vision Diagnostician:</strong> Analyzes user skin photos to categorize dermatological conditions using Convolutional Neural Networks.</li>
+                <li><strong>Educational Triage Panel:</strong> Offers detailed overviews of identified conditions, guidance on home care steps, and severity level scales.</li>
+                <li><strong>Offline Care Guides:</strong> Access to wellness metrics and remedies for areas with poor internet connection.</li>
+            </ul>
+            
+            <h4>Technologies Used</h4>
+            <ul>
+                <li>Python & Jupyter Notebook environments</li>
+                <li>TensorFlow, Keras, and MobileNet v2 neural structures</li>
+                <li>OpenCV image preprocessing layers</li>
+                <li>Flask API middleware services</li>
+            </ul>
+        `
+    },
+    'resume-checker': {
         title: 'AI Resume Checker',
         description: `
             <h3>Project Overview</h3>
-            <p>An intelligent resume analysis tool powered by AI that helps job seekers optimize their resumes for better opportunities.</p>
+            <p>An intelligent resume analysis tool designed to optimize application visibility. Leverages localized AI models to evaluate formatting, keyword matching, and Applicant Tracking System (ATS) compliance.</p>
             
             <h4>Key Features</h4>
             <ul>
-                <li>AI-powered resume analysis using NLP</li>
-                <li>Keyword optimization suggestions</li>
-                <li>ATS (Applicant Tracking System) compatibility check</li>
-                <li>Grammar and spelling correction</li>
-                <li>Format and structure recommendations</li>
-                <li>Industry-specific suggestions</li>
-                <li>Score-based evaluation system</li>
+                <li><strong>ATS Parser:</strong> Automatically reviews resume schemas to flag parsing errors, layout warnings, or incorrect sections.</li>
+                <li><strong>Keyword Optimization Matrix:</strong> Matches resumes against target job descriptions to identify missing technical keywords.</li>
+                <li><strong>Actionable Feedback Panel:</strong> Generates custom rewrite recommendations for work experience bullet points.</li>
             </ul>
             
             <h4>Technologies Used</h4>
             <ul>
-                <li>Python for backend processing</li>
-                <li>TensorFlow for machine learning models</li>
-                <li>Natural Language Processing (NLP) libraries</li>
-                <li>Flask for API development</li>
-                <li>React for user interface</li>
+                <li>Python & Ollama LLM integration</li>
+                <li>Llama 3 NLP Models</li>
+                <li>PyPDF2 & PDFMiner text extraction libraries</li>
+                <li>React Web UI container</li>
             </ul>
-            
-            <h4>Impact</h4>
-            <p>This tool has helped numerous job seekers improve their resumes, with an average score improvement of 35% after implementing the suggestions.</p>
         `
     },
-    voice: {
-        title: 'AI Voice Assistant',
+    'voice-assistant': {
+        title: 'Voice AI Assistant',
         description: `
             <h3>Project Overview</h3>
-            <p>An intelligent voice-activated personal assistant capable of understanding natural language and performing various tasks.</p>
+            <p>An intelligent, conversational companion agent capable of processing vocal input commands, parsing user intent, executing utility tasks, and vocalizing responses.</p>
             
             <h4>Key Features</h4>
             <ul>
-                <li>Voice recognition and processing</li>
-                <li>Natural language understanding</li>
-                <li>Task automation (emails, reminders, web searches)</li>
-                <li>Weather updates and news briefings</li>
-                <li>Music playback control</li>
-                <li>Smart home integration capabilities</li>
-                <li>Conversational AI with context awareness</li>
+                <li><strong>Real-time Speech Synthesis:</strong> High-performance speech-to-text and text-to-speech pipelines.</li>
+                <li><strong>Intent Engine:</strong> Parses conversational intent to trigger tasks such as drafting emails, retrieving weather forecasts, or running calculations.</li>
+                <li><strong>Context-Aware NLP:</strong> Retains multi-turn conversation memory for natural dialogue.</li>
             </ul>
             
             <h4>Technologies Used</h4>
             <ul>
-                <li>Python for core functionality</li>
-                <li>Speech Recognition library</li>
-                <li>OpenAI API for natural language processing</li>
-                <li>Text-to-Speech (TTS) engines</li>
-                <li>Web scraping for information retrieval</li>
+                <li>Python & OpenAI API interfaces</li>
+                <li>SpeechRecognition & PyAudio pipelines</li>
+                <li>gTTS & Pyttsx3 speech engines</li>
+                <li>BeautifulSoup utility scraping scripts</li>
+            </ul>
+        `
+    },
+    'shoplink': {
+        title: 'ShopLink Platform',
+        description: `
+            <h3>Project Overview</h3>
+            <p>A high-performance e-commerce management platform built to synchronize customer shopping interfaces with back-end inventory states in real time.</p>
+            
+            <h4>Key Features</h4>
+            <ul>
+                <li><strong>Live Inventory Tracker:</strong> Updates catalog counts across all active client pages when sales occur or stock is added.</li>
+                <li><strong>Secure Authorization Gateway:</strong> Implements OAuth user validation patterns and checkout tracking.</li>
+                <li><strong>Admin Dashboard:</strong> Comprehensive dashboard for managing products, categories, and tracking order completions.</li>
             </ul>
             
-            <h4>Future Enhancements</h4>
-            <p>Planning to add multi-language support, improved context retention, and integration with more third-party services and APIs.</p>
+            <h4>Technologies Used</h4>
+            <ul>
+                <li>React.js (Context API and Custom Hooks)</li>
+                <li>Supabase real-time database subscription sockets</li>
+                <li>Firebase User Authentication</li>
+                <li>Vanilla CSS variables with Glassmorphic variables</li>
+            </ul>
+        `
+    },
+    'health-ai': {
+        title: 'HealthAI Chatbot',
+        description: `
+            <h3>Project Overview</h3>
+            <p>An offline-accessible medical advisory assistant developed for rural or isolated zones where access to clinics and internet bandwidth is severely constrained.</p>
+            
+            <h4>Key Features</h4>
+            <ul>
+                <li><strong>Symptom Evaluator:</strong> Conversational dialogue engine analyzing symptom descriptions to suggest potential concerns.</li>
+                <li><strong>Emergency Guidelines:</strong> Instant access to offline-stored manuals, first-aid protocols, and directory cards.</li>
+                <li><strong>Medical Dictionary:</strong> Explains complex medical terminology and prescriptions in plain language.</li>
+            </ul>
+            
+            <h4>Technologies Used</h4>
+            <ul>
+                <li>Python & Jupyter Notebook development structures</li>
+                <li>NLTK & spaCy natural language tokenizers</li>
+                <li>SQLite local indexing directories</li>
+                <li>JSON schema mapping tools</li>
+            </ul>
+        `
+    },
+    'learn-ai': {
+        title: 'LearnAI Workspace',
+        description: `
+            <h3>Project Overview</h3>
+            <p>An educational companion project built for Hack-o-Mania, designed to help students learn complex topics through multi-modal query inputs.</p>
+            
+            <h4>Key Features</h4>
+            <ul>
+                <li><strong>Multi-modal Inputs:</strong> Supports typing queries, scanning questions from textbook images, or asking via voice.</li>
+                <li><strong>Structured Explanations:</strong> Breaks down complex concepts into step-by-step learning modules.</li>
+                <li><strong>Voice Synthesis Output:</strong> Speaks solutions back to support auditory learning styles.</li>
+            </ul>
+            
+            <h4>Technologies Used</h4>
+            <ul>
+                <li>Tesseract OCR for image text extraction</li>
+                <li>Python NLTK text processing engines</li>
+                <li>SpeechRecognition APIs</li>
+                <li>Responsive mobile web layouts</li>
+            </ul>
+        `
+    },
+    'cooking-chatbot': {
+        title: 'AI Cooking Chatbot',
+        description: `
+            <h3>Project Overview</h3>
+            <p>An interactive culinary assistant chatbot that generates recipes based on available ingredients and user preferences.</p>
+            
+            <h4>Key Features</h4>
+            <ul>
+                <li><strong>Ingredient Matching:</strong> Suggests recipes using only ingredients already in your pantry.</li>
+                <li><strong>Culinary Substitutions:</strong> Recommends alternatives for missing ingredients or dietary restrictions.</li>
+                <li><strong>Smart Scaling:</strong> Dynamically adjusts ingredient measurements based on serving size.</li>
+            </ul>
+            
+            <h4>Technologies Used</h4>
+            <ul>
+                <li>HTML5 & CSS3 layout systems</li>
+                <li>JavaScript State logic</li>
+                <li>NLP prompt templates</li>
+            </ul>
         `
     }
 };
 
 viewMoreBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-        const project = btn.getAttribute('data-project');
-        const details = projectDetails[project];
+        const projectKey = btn.getAttribute('data-project');
+        const details = projectDetails[projectKey];
         
-        if (details) {
+        if (details && modal) {
             document.getElementById('modalTitle').textContent = details.title;
             document.getElementById('modalDescription').innerHTML = details.description;
             modal.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Stop scrolling behind modal
         }
     });
 });
 
-closeModal.addEventListener('click', () => {
-    modal.style.display = 'none';
-});
+if (closeModal && modal) {
+    closeModal.addEventListener('click', () => {
+        modal.style.display = 'none';
+        document.body.style.overflow = ''; // Resume scroll
+    });
+}
 
 window.addEventListener('click', (e) => {
     if (e.target === modal) {
         modal.style.display = 'none';
+        document.body.style.overflow = '';
     }
 });
 
-// Feedback Form Submission
+// Feedback Form Submission Handler
 const feedbackForm = document.getElementById('feedbackForm');
 if (feedbackForm) {
     feedbackForm.addEventListener('submit', (e) => {
         e.preventDefault();
         
         const name = document.getElementById('name').value;
-        const feedback = document.getElementById('feedback').value;
+        const feedbackText = document.getElementById('feedback').value;
         
-        // Here you would typically send this data to a backend or email service
-        console.log('Feedback submitted:', { name, feedback });
+        // Simulating data transmission
+        console.log('Feedback submitted:', { name, feedbackText });
         
-        // Show success message
-        alert(`Thank you, ${name}! Your feedback has been submitted successfully.`);
+        // Show styled success alert
+        alert(`Thank you, ${name}! Your feedback has been logged successfully.`);
         
-        // Reset form
         feedbackForm.reset();
     });
 }
 
-// Share Button for Publications
+// Share Button logic for Publications
 const shareBtn = document.querySelector('.share-btn');
 if (shareBtn) {
     shareBtn.addEventListener('click', async () => {
-        const publicationUrl = 'https://lnkd.in/drU_9Swc';
-        const publicationTitle = 'AI Powered Skin Disease Detector - Research Paper';
+        const publicationUrl = 'https://ijrpr.com/uploads/V6ISSUE5/IJRPR44601.pdf';
+        const publicationTitle = 'AI Powered Skin Disease Detector - Devansh Jain';
         
         if (navigator.share) {
             try {
                 await navigator.share({
                     title: publicationTitle,
-                    text: 'Check out this research paper on AI-powered skin disease detection!',
+                    text: 'Check out Devansh Jain\'s research publication on AI-Powered Skin Disease Detection!',
                     url: publicationUrl
                 });
             } catch (err) {
-                console.log('Error sharing:', err);
+                console.log('Share error:', err);
             }
         } else {
-            // Fallback: Copy to clipboard
+            // Fallback: Copy link to clipboard
             navigator.clipboard.writeText(publicationUrl);
-            alert('Link copied to clipboard!');
+            alert('Publication link copied to clipboard!');
         }
     });
 }
 
-// Back to Top Button
+// Back to Top Button Actions
 const backToTopBtn = document.getElementById('backToTop');
-
 window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 300) {
+    if (window.pageYOffset > 400 && backToTopBtn) {
         backToTopBtn.classList.add('visible');
-    } else {
+    } else if (backToTopBtn) {
         backToTopBtn.classList.remove('visible');
     }
 });
 
-backToTopBtn.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+if (backToTopBtn) {
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     });
-});
+}
 
-// Smooth Scrolling for Navigation Links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            const offsetTop = target.offsetTop - 70; // Account for fixed navbar
-            window.scrollTo({
-                top: offsetTop,
-                behavior: 'smooth'
-            });
-        }
-    });
-});
-
-// Skill Progress Bar Animation
-const observerOptions = {
-    threshold: 0.5,
-    rootMargin: '0px 0px -100px 0px'
-};
-
-const progressBarObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const progressBars = entry.target.querySelectorAll('.progress-bar');
-            progressBars.forEach(bar => {
-                const width = bar.style.width;
-                bar.style.width = '0%';
-                setTimeout(() => {
-                    bar.style.width = width;
-                }, 100);
-            });
-        }
-    });
-}, observerOptions);
-
+// Skill Progress Bar Animation trigger
 const skillsSection = document.querySelector('.skills-section');
 if (skillsSection) {
-    progressBarObserver.observe(skillsSection);
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const progressBars = entry.target.querySelectorAll('.progress-bar');
+                progressBars.forEach(bar => {
+                    const width = bar.style.width;
+                    bar.style.width = '0%';
+                    setTimeout(() => {
+                        bar.style.width = width;
+                    }, 100);
+                });
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.25 });
+    
+    observer.observe(skillsSection);
 }
 
-// Simple AOS (Animate On Scroll) Implementation
-const observeElements = document.querySelectorAll('[data-aos]');
-
-const elementObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('aos-animate');
-        }
-    });
-}, {
-    threshold: 0.2
-});
-
-observeElements.forEach(element => {
-    elementObserver.observe(element);
-});
-
-// Typing Effect for Hero Subtitle (Optional Enhancement)
-function typeWriter(element, text, speed = 100) {
-    let i = 0;
-    element.textContent = '';
-    
-    function type() {
-        if (i < text.length) {
-            element.textContent += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        }
-    }
-    
-    type();
-}
-
-// Uncomment to enable typing effect on page load
-// window.addEventListener('load', () => {
-//     const subtitle = document.querySelector('.hero-subtitle');
-//     const originalText = subtitle.textContent;
-//     typeWriter(subtitle, originalText, 80);
-// });
-
-// Counter Animation for Stats
-function animateCounter(element, target, duration = 2000) {
-    const start = 0;
+// Counter Animation helper
+function animateCounter(element, target, duration = 1800) {
+    let start = 0;
     const increment = target / (duration / 16);
-    let current = start;
     
     const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-            element.textContent = target + '+';
+        start += increment;
+        if (start >= target) {
+            element.textContent = target + (element.getAttribute('data-suffix') || '');
             clearInterval(timer);
         } else {
-            element.textContent = Math.floor(current) + '+';
+            element.textContent = Math.floor(start) + (element.getAttribute('data-suffix') || '');
         }
     }, 16);
 }
 
-// Animate stats counters when they come into view
-const statsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const statNumbers = entry.target.querySelectorAll('.stat-number');
-            statNumbers.forEach(stat => {
-                const target = parseInt(stat.textContent);
-                animateCounter(stat, target);
-            });
-            statsObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.5 });
-
+// Animate statistics counters
 const heroStats = document.querySelector('.hero-stats');
 if (heroStats) {
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const statNumbers = entry.target.querySelectorAll('.stat-number');
+                statNumbers.forEach(stat => {
+                    const numberStr = stat.textContent.trim();
+                    const value = parseInt(numberStr);
+                    const suffix = numberStr.includes('+') ? '+' : '';
+                    if (suffix) {
+                        stat.setAttribute('data-suffix', suffix);
+                    }
+                    animateCounter(stat, value);
+                });
+                statsObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.3 });
+    
     statsObserver.observe(heroStats);
 }
 
-// Theme Toggle (Optional - for future dark/light mode)
-// This can be expanded later
-function initTheme() {
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-}
-
-// Initialize theme on page load
-initTheme();
-
-// Prevent default behavior for download CV if file doesn't exist
-const downloadBtn = document.querySelector('a[download]');
-if (downloadBtn) {
-    downloadBtn.addEventListener('click', (e) => {
-        const href = downloadBtn.getAttribute('href');
-        if (href === './resume.pdf') {
-            // Check if resume exists, otherwise show message
-            fetch(href)
-                .then(response => {
-                    if (!response.ok) {
-                        e.preventDefault();
-                        alert('Resume file is not available yet. Please check back later!');
-                    }
-                })
-                .catch(() => {
-                    e.preventDefault();
-                    alert('Resume file is not available yet. Please check back later!');
-                });
-        }
+// Animate on Scroll Intersection Observer (AOS Simulator)
+const observeElements = document.querySelectorAll('[data-aos]');
+if (observeElements.length > 0) {
+    const elementObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('aos-animate');
+            }
+        });
+    }, { threshold: 0.12 });
+    
+    observeElements.forEach(element => {
+        elementObserver.observe(element);
     });
 }
 
-// Console message for developers
+// Developer Welcome Message
 console.log('%c🚀 Welcome to Devansh\'s Portfolio!', 'color: #6366f1; font-size: 20px; font-weight: bold;');
-console.log('%cInterested in the code? Check out the repository on GitHub!', 'color: #8b5cf6; font-size: 14px;');
-console.log('%chttps://github.com/Devansh2305-code/Personal-Portfolio', 'color: #ec4899; font-size: 12px;');
+console.log('%cInterested in the code? Check out the repository on GitHub!', 'color: #a855f7; font-size: 14px;');
+console.log('%chttps://github.com/Devansh2305-code/Personal-Portfolio', 'color: #14b8a6; font-size: 12px;');
