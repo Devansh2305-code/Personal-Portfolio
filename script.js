@@ -1092,11 +1092,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const syncGithubBtn = document.getElementById('syncGithubBtn');
     const resetAdminDataBtn = document.getElementById('resetAdminDataBtn');
 
-    // Secret Admin Open Trigger
-    if (secretAdminBtn && adminModal) {
-        secretAdminBtn.addEventListener('click', () => {
+    function openAdminPanel() {
+        if (adminModal) {
             adminModal.style.display = 'flex';
             renderAdminLists();
+        }
+    }
+
+    // Secret Admin Open Trigger
+    if (secretAdminBtn) {
+        secretAdminBtn.addEventListener('click', () => {
+            openAdminPanel();
         });
     }
 
@@ -1104,6 +1110,18 @@ document.addEventListener('DOMContentLoaded', () => {
         closeAdminModal.addEventListener('click', () => {
             adminModal.style.display = 'none';
         });
+    }
+
+    // Keyboard Shortcut (Ctrl + Shift + A) & #admin URL Hash Trigger
+    window.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+            e.preventDefault();
+            openAdminPanel();
+        }
+    });
+
+    if (window.location.hash === '#admin') {
+        openAdminPanel();
     }
 
     // Admin Tab Navigation

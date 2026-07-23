@@ -2067,20 +2067,40 @@ section {
     transform: translate(0) scale(1) rotate(0);
 }
 
-/* Secret Admin Trigger */
+/* Secret Admin Trigger Button */
 .secret-admin-trigger {
     cursor: pointer;
-    display: inline-block;
-    transition: color 0.3s ease, transform 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: 12px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: rgba(95, 111, 82, 0.12);
+    border: 1px solid rgba(95, 111, 82, 0.25);
+    color: var(--primary);
+    font-size: 0.78rem;
+    font-weight: 700;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     user-select: none;
-    font-weight: 800;
-    padding: 0 2px;
+    vertical-align: middle;
+}
+
+.secret-admin-trigger i {
+    font-size: 0.85rem;
+    transition: transform 0.4s ease;
 }
 
 .secret-admin-trigger:hover {
-    color: var(--primary);
-    transform: scale(1.6);
-    text-shadow: 0 0 12px var(--primary-glow);
+    background: var(--gradient-primary);
+    color: #ffffff;
+    border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--primary-glow);
+}
+
+.secret-admin-trigger:hover i {
+    transform: rotate(90deg);
 }
 
 /* Secret Admin Modal Specific Styles */
