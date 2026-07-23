@@ -698,21 +698,52 @@ window.addEventListener('click', (e) => {
     }
 });
 
+// Toast Notification Engine
+function showToast(message, type = 'info') {
+    let container = document.getElementById('toastContainer');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'toastContainer';
+        container.className = 'toast-container';
+        document.body.appendChild(container);
+    }
+
+    const toast = document.createElement('div');
+    toast.className = `toast-item toast-${type}`;
+    
+    let iconClass = 'fas fa-info-circle';
+    if (type === 'success') iconClass = 'fas fa-check-circle';
+    if (type === 'error') iconClass = 'fas fa-exclamation-triangle';
+
+    toast.innerHTML = `<i class="${iconClass}"></i> <span>${message}</span>`;
+    container.appendChild(toast);
+
+    setTimeout(() => {
+        toast.classList.add('show');
+    }, 10);
+
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    }, 3500);
+}
+
 // Feedback Form Submission Handler
 const feedbackForm = document.getElementById('feedbackForm');
 if (feedbackForm) {
     feedbackForm.addEventListener('submit', (e) => {
         e.preventDefault();
         
-        const name = document.getElementById('name').value;
-        const feedbackText = document.getElementById('feedback').value;
+        const name = document.getElementById('name').value.trim();
+        const feedbackText = document.getElementById('feedback').value.trim();
         
-        // Simulating data transmission
+        if (!name || !feedbackText) {
+            showToast('Please fill in both name and message fields.', 'error');
+            return;
+        }
+
         console.log('Feedback submitted:', { name, feedbackText });
-        
-        // Show styled success alert
-        alert(`Thank you, ${name}! Your feedback has been logged successfully.`);
-        
+        showToast(`Thank you, ${name}! Your feedback has been sent.`, 'success');
         feedbackForm.reset();
     });
 }
@@ -732,12 +763,14 @@ if (shareBtn) {
                     url: publicationUrl
                 });
             } catch (err) {
-                console.log('Share error:', err);
+                if (err.name !== 'AbortError') {
+                    showToast('Share failed. Copying link instead.', 'info');
+                    navigator.clipboard.writeText(publicationUrl);
+                }
             }
         } else {
-            // Fallback: Copy link to clipboard
             navigator.clipboard.writeText(publicationUrl);
-            alert('Publication link copied to clipboard!');
+            showToast('Publication link copied to clipboard!', 'success');
         }
     });
 }
@@ -1558,15 +1591,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 localStorage.removeItem('portfolio_projects_data');
                 localStorage.removeItem('portfolio_skills_data');
                 localStorage.removeItem('portfolio_experience_data');
-                projectsState = DEFAULT_PROJECTS;
-                skillsState = DEFAULT_SKILLS;
-                experienceState = DEFAULT_EXPERIENCE;
+                localStorage.removeItem('portfolio_current_persona');
+                projectsState = PERSONA_CONFIG[currentPersona].projects;
+                skillsState = PERSONA_CONFIG[currentPersona].skills;
+                experienceState = PERSONA_CONFIG[currentPersona].experience;
                 saveAdminState();
                 renderPortfolioProjects();
                 renderPortfolioSkills();
                 renderPortfolioExperience();
                 renderAdminLists();
-                alert('Portfolio content reset to default state.');
+                showToast('Portfolio content reset to default state.', 'info');
             }
         });
     }
