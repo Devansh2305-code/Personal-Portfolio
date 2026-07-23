@@ -1,10 +1,5 @@
-// Navigation Bar Scroll Effect
+// Navigation Bar Scroll Effect (Logo bar)
 const navbar = document.getElementById('navbar');
-const navLinks = document.querySelectorAll('.nav-link');
-const navToggle = document.getElementById('navToggle');
-const navMenu = document.getElementById('navMenu');
-
-// Navbar scroll effect
 window.addEventListener('scroll', () => {
     if (window.scrollY > 80) {
         navbar.classList.add('scrolled');
@@ -13,48 +8,86 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Mobile Navigation Toggle
-if (navToggle && navMenu) {
-    navToggle.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        navToggle.classList.toggle('active');
-    });
-}
+// Navigation Wheel Elements
+const navWheel = document.getElementById('navWheel');
+const navWheelItems = document.querySelectorAll('.nav-wheel-item');
+const projectSubdivision = document.getElementById('projectSubdivision');
+const subBtns = document.querySelectorAll('.sub-btn');
 
-// Close mobile menu when clicking on a link
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        if (navMenu && navToggle) {
-            navMenu.classList.remove('active');
-            navToggle.classList.remove('active');
-        }
-    });
-});
+// Target rotation map for active sections
+// As the section changes, the wheel rotates to position the active section at the left point (180deg)
+const rotationMap = {
+    'home': 90,
+    'skills': 60,
+    'experience': 30,
+    'projects': 0,
+    'publications': -30,
+    'certifications': -60,
+    'feedback': -90
+};
 
-// Active Navigation Link on Scroll
 const sections = document.querySelectorAll('section, header');
-function setActiveLink() {
+
+// Set active link scroll-spy and rotate wheel
+function handleScroll() {
     let currentSection = 'home';
     
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        
-        if (window.pageYOffset >= sectionTop - 150) {
+        if (window.pageYOffset >= sectionTop - 250) {
             currentSection = section.getAttribute('id') || 'home';
         }
     });
-    
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        const href = link.getAttribute('href');
-        if (href === `#${currentSection}` || (currentSection === 'home' && href === '#home')) {
-            link.classList.add('active');
+
+    // Special check for page bottom to highlight Contact (feedback)
+    if ((window.innerHeight + window.pageYOffset) >= document.documentElement.scrollHeight - 20) {
+        currentSection = 'feedback';
+    }
+
+    // Set wheel rotation angle
+    const targetRotation = rotationMap[currentSection] !== undefined ? rotationMap[currentSection] : 90;
+    if (navWheel) {
+        navWheel.style.setProperty('--wheel-rotation', `${targetRotation}deg`);
+    }
+
+    // Set active class on wheel items
+    navWheelItems.forEach(item => {
+        const sectionName = item.getAttribute('data-section');
+        if (sectionName === currentSection) {
+            item.classList.add('active');
+        } else {
+            item.classList.remove('active');
         }
     });
+
+    // Show/hide project categories subdivision menu
+    if (currentSection === 'projects') {
+        if (projectSubdivision) projectSubdivision.classList.add('visible');
+    } else {
+        if (projectSubdivision) projectSubdivision.classList.remove('visible');
+    }
 }
-window.addEventListener('scroll', setActiveLink);
-setActiveLink();
+
+window.addEventListener('scroll', handleScroll);
+window.addEventListener('resize', handleScroll);
+// Run on load
+document.addEventListener('DOMContentLoaded', () => {
+    handleScroll();
+});
+
+// Handle clicking on wheel items to scroll to corresponding section
+navWheelItems.forEach(item => {
+    item.addEventListener('click', () => {
+        const sectionId = item.getAttribute('data-section');
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+            window.scrollTo({
+                top: targetSection.offsetTop - 80,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
 
 // Profile Image Upload/Change Simulator
 const profileImage = document.getElementById('profileImage');
@@ -129,7 +162,7 @@ projectCards.forEach(card => {
         card.style.setProperty('--mouse-y', `${y}px`);
         
         // Dynamic border highlight style helper
-        card.style.boxShadow = `0 15px 35px rgba(99, 102, 241, 0.15), radial-gradient(800px circle at ${x}px ${y}px, rgba(255,255,255,0.06), transparent 40%)`;
+        card.style.boxShadow = `0 15px 35px rgba(95, 111, 82, 0.12), radial-gradient(800px circle at ${x}px ${y}px, rgba(95, 111, 82, 0.05), transparent 40%)`;
     });
     
     card.addEventListener('mouseleave', () => {
@@ -139,34 +172,78 @@ projectCards.forEach(card => {
 
 // Dynamic Project Filtering
 const filterButtons = document.querySelectorAll('.filter-btn');
+
+function filterProjects(filterValue) {
+    projectCards.forEach(card => {
+        const cardCategory = card.getAttribute('data-category');
+        
+        if (filterValue === 'all' || cardCategory === filterValue) {
+            card.style.display = 'flex';
+            // Trigger reflow for transition
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'scale(1)';
+            }, 50);
+        } else {
+            card.style.opacity = '0';
+            card.style.transform = 'scale(0.9)';
+            setTimeout(() => {
+                card.style.display = 'none';
+            }, 300);
+        }
+    });
+}
+
+// Sync selection visual states helper
+function syncFilterStates(filterValue) {
+    // Sync main project filter tabs
+    filterButtons.forEach(btn => {
+        if (btn.getAttribute('data-filter') === filterValue) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+
+    // Sync subdivision navigation wheel buttons
+    if (subBtns) {
+        subBtns.forEach(btn => {
+            if (btn.getAttribute('data-filter') === filterValue) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+    }
+}
+
 filterButtons.forEach(button => {
     button.addEventListener('click', () => {
-        // Active status classes
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
-        
         const filterValue = button.getAttribute('data-filter');
-        
-        projectCards.forEach(card => {
-            const cardCategory = card.getAttribute('data-category');
+        syncFilterStates(filterValue);
+        filterProjects(filterValue);
+    });
+});
+
+if (subBtns) {
+    subBtns.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.stopPropagation(); // Stop click propagation to parent wheel items
+            const filterValue = button.getAttribute('data-filter');
+            syncFilterStates(filterValue);
+            filterProjects(filterValue);
             
-            if (filterValue === 'all' || cardCategory === filterValue) {
-                card.style.display = 'flex';
-                // Trigger reflow for transition
-                setTimeout(() => {
-                    card.style.opacity = '1';
-                    card.style.transform = 'scale(1)';
-                }, 50);
-            } else {
-                card.style.opacity = '0';
-                card.style.transform = 'scale(0.9)';
-                setTimeout(() => {
-                    card.style.display = 'none';
-                }, 300);
+            // Also scroll to the project section if not fully visible, for convenience
+            const projectSection = document.getElementById('projects');
+            if (projectSection) {
+                window.scrollTo({
+                    top: projectSection.offsetTop - 80,
+                    behavior: 'smooth'
+                });
             }
         });
     });
-});
+}
 
 // Project Modal Detailed Profiles
 const modal = document.getElementById('projectModal');

@@ -29,20 +29,6 @@
             <div class="logo">
                 <span class="logo-text">Devansh<span class="logo-dot">.</span></span>
             </div>
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="#home" class="nav-link active">Home</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
-                <li><a href="#experience" class="nav-link">Experience</a></li>
-                <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#publications" class="nav-link">Publications</a></li>
-                <li><a href="#certifications" class="nav-link">Certifications</a></li>
-                <li><a href="#feedback" class="nav-link">Contact</a></li>
-            </ul>
         </div>
     </nav>
 
@@ -583,6 +569,44 @@
     <button class="back-to-top" id="backToTop" aria-label="Scroll back to top">
         <i class="fas fa-arrow-up"></i>
     </button>
+
+    <!-- Spinning Wheel Navigation -->
+    <div class="nav-wheel-container" id="navWheelContainer">
+        <!-- Floating wheel -->
+        <div class="nav-wheel" id="navWheel" style="--wheel-rotation: 90deg;">
+            <div class="nav-wheel-item active" data-section="home" style="--angle: 90deg;">
+                <span class="nav-wheel-text">Home</span>
+            </div>
+            <div class="nav-wheel-item" data-section="skills" style="--angle: 120deg;">
+                <span class="nav-wheel-text">Skills</span>
+            </div>
+            <div class="nav-wheel-item" data-section="experience" style="--angle: 150deg;">
+                <span class="nav-wheel-text">Experience</span>
+            </div>
+            <div class="nav-wheel-item" data-section="projects" style="--angle: 180deg;">
+                <span class="nav-wheel-text">Projects</span>
+            </div>
+            <div class="nav-wheel-item" data-section="publications" style="--angle: 210deg;">
+                <span class="nav-wheel-text">Publications</span>
+            </div>
+            <div class="nav-wheel-item" data-section="certifications" style="--angle: 240deg;">
+                <span class="nav-wheel-text">Certifications</span>
+            </div>
+            <div class="nav-wheel-item" data-section="feedback" style="--angle: 270deg;">
+                <span class="nav-wheel-text">Contact</span>
+            </div>
+        </div>
+        <!-- Active indicator marker pointing to active item -->
+        <div class="nav-wheel-marker"></div>
+
+        <!-- Project Subdivision Categories -->
+        <div class="project-subdivision" id="projectSubdivision">
+            <button class="sub-btn active" data-filter="all">All Projects</button>
+            <button class="sub-btn" data-filter="ai-ml">AI & ML</button>
+            <button class="sub-btn" data-filter="data-analytics">Data Analytics</button>
+            <button class="sub-btn" data-filter="web-apps">Web Apps</button>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
