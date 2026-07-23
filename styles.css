@@ -133,8 +133,112 @@ body::after {
     text-shadow: 0 0 10px var(--accent-glow);
 }
 
-.hero-brand {
-    margin-bottom: 25px;
+.hero-brand-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.persona-switcher {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--bg-surface);
+    padding: 6px 14px;
+    border-radius: 40px;
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 4px 15px rgba(95, 111, 82, 0.08);
+}
+
+.persona-label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.persona-pills {
+    display: flex;
+    gap: 6px;
+}
+
+.persona-pill {
+    padding: 7px 15px;
+    border-radius: 30px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
+}
+
+.persona-pill i {
+    font-size: 0.9rem;
+    color: var(--primary);
+    transition: transform 0.3s ease;
+}
+
+.persona-pill:hover {
+    color: var(--text-primary);
+    background: rgba(95, 111, 82, 0.08);
+    border-color: rgba(95, 111, 82, 0.2);
+}
+
+.persona-pill:hover i {
+    transform: scale(1.15);
+}
+
+.persona-pill.active {
+    background: var(--gradient-primary);
+    color: #ffffff;
+    border-color: transparent;
+    box-shadow: 0 4px 14px var(--primary-glow);
+}
+
+.persona-pill.active i {
+    color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    .hero-brand-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    .persona-switcher {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 10px;
+        border-radius: 18px;
+    }
+    .persona-pills {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        -webkit-overflow-scrolling: touch;
+    }
+    .persona-pill {
+        font-size: 0.78rem;
+        padding: 6px 12px;
+    }
 }
 
 

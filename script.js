@@ -402,26 +402,125 @@ const closeModal = document.querySelector('.close-modal');
 const viewMoreBtns = document.querySelectorAll('.view-more-btn');
 
 const projectDetails = {
+    'dsw-logo': {
+        title: 'DSW Official Logo & Brand Emblem Design',
+        description: `
+            <h3>Project Overview</h3>
+            <p>Designed the official Department of Student Welfare (DSW) circular emblem for K.R. Mangalam University, incorporating 10 distinct activity icons representing academic, cultural, athletic, and welfare initiatives.</p>
+            
+            <h4>Design Architecture & Iconography</h4>
+            <ul>
+                <li><strong>10 Activity Icons:</strong> Academics, Music & Singing, Dance, Photography, Sports & Fitness, Stage Lighting, Mountain Trekking, Theater & Drama, Broadcasting & Media, Tech & Innovation.</li>
+                <li><strong>Official Tagline:</strong> <em>Engage • Empower • Enrich</em></li>
+                <li><strong>Color System:</strong> Vibrant multi-hue wheel with central university accreditation emblem.</li>
+            </ul>
+        `
+    },
+    'solesta-26': {
+        title: 'Solesta \'26 Mega Fest Campaign & Graphics',
+        description: `
+            <h3>Project Overview</h3>
+            <p>Authored the complete visual branding, stage posters, promotional banners, and concert publicity suite for Solesta \'26, the annual mega cultural festival of K.R. Mangalam University.</p>
+            
+            <h4>Campaign Highlights</h4>
+            <ul>
+                <li><strong>Concert Publicity:</strong> Main stage poster design for headlining celebrity artist <strong>Jasmine Sandlas</strong> (The "Gulabi Queen") and DJ Shreya Deshmukh.</li>
+                <li><strong>Event Contests:</strong> Promotional graphics for Mr. & Ms. Freshers and Mr. & Ms. Charismatic competitions.</li>
+                <li><strong>Print Collateral:</strong> Food stall banners, vertical entrance standees, and stage backdrop artwork.</li>
+            </ul>
+        `
+    },
+    'starlit-campaign': {
+        title: 'STARLIT: KRMU Rising Influencer Contest',
+        description: `
+            <h3>Project Overview</h3>
+            <p>Developed the complete Instagram campaign graphics, registration countdown banners, and exclusive merchandise giveaway posters for STARLIT: The KRMU Rising Influencer Challenge.</p>
+            
+            <h4>Creative Deliverables</h4>
+            <ul>
+                <li><strong>Registration Deadline Post:</strong> High-impact neon typography and countdown graphics ("1 Day Left To Register").</li>
+                <li><strong>Jasmine Sandlas Meet & Greet:</strong> Exclusive poster for 20 lucky participants winning signed hoodies & t-shirts.</li>
+                <li><strong>QR Code Integration:</strong> Seamless registration scanning design layout for digital & print distribution.</li>
+            </ul>
+        `
+    },
+    'prithvi-pulse': {
+        title: 'Prithvi Pulse 1.0 & Official Certificate Design',
+        description: `
+            <h3>Project Overview</h3>
+            <p>Created the full event banner suite, competition posters (Green Vichaar Sabha, Green Canvas, Eco-Haat, Nature on the Ramp), and the official Certificate of Achievement for World Earth Day 2026.</p>
+            
+            <h4>Key Features</h4>
+            <ul>
+                <li><strong>Chief Guest Banner:</strong> Official event banner featuring Shri. Subhash Chander Yadav, IFS (Chief Conservator of Forests).</li>
+                <li><strong>Official Certificate Layout:</strong> High-resolution certificate template with custom leaf border vectors, DSW seal, and committee sign-off lines.</li>
+                <li><strong>Inter-College Contests:</strong> Waste to Wonders Exhibition, Nukkad Natak, and Eco-Fashion Walk posters.</li>
+            </ul>
+        `
+    },
+    'fit-fiesta': {
+        title: 'Fit Fiesta 2.0 & Mr. & Ms. Fit Challenge Standee',
+        description: `
+            <h3>Project Overview</h3>
+            <p>Designed vertical standees and promotional banners for the Health Society\'s flagship fitness festival Fit Fiesta 2.0 at K.R. Mangalam University.</p>
+            
+            <h4>Graphics Deliverables</h4>
+            <ul>
+                <li><strong>Celebrity Guest Feature:</strong> Standee spotlighting <strong>Mr. Rohit Yadav</strong> (2nd Runner Up Mr. India 2025, Mr. Gurgaon 2023, Mr. Haryana 2023 & 2025).</li>
+                <li><strong>Challenge Matrix Graphics:</strong> Custom diamond-grid graphic breakdown for Plank, Front Lunges, Squats, Crunches, Yoga, and Push-Ups challenges.</li>
+            </ul>
+        `
+    },
+    'yoga-day': {
+        title: 'International Yoga Day 2026 Promotional Banner',
+        description: `
+            <h3>Project Overview</h3>
+            <p>Designed Zen-inspired promotional graphics and event banners for International Yoga Day 2026 in collaboration with the National Service Scheme (NSS) and DSW.</p>
+            
+            <h4>Visual Elements</h4>
+            <ul>
+                <li><strong>Aesthetic Silhouette:</strong> Minimalist central meditating silhouette framed by golden sunrise gradient.</li>
+                <li><strong>Botanical Textures:</strong> Subtle foliage vectors and clean event details (D-Block, KRMU).</li>
+            </ul>
+        `
+    },
+    'japan-india-cdc': {
+        title: 'Japan-India Academic & Industry Collaboration Banner',
+        description: `
+            <h3>Project Overview</h3>
+            <p>Designed the official welcoming banner for the Career Development Centre (CDC) international delegation from Japan.</p>
+            
+            <h4>Cultural Fusion Art</h4>
+            <ul>
+                <li><strong>Landmark Blending:</strong> Seamless graphic synthesis of Indian landmarks (Qutub Minar, Red Fort) and Japanese icons (Mt. Fuji, Sakura cherry blossoms, Pagoda architecture).</li>
+                <li><strong>Official Flags & Logos:</strong> High-resolution flag vectors and official academic branding.</li>
+            </ul>
+        `
+    },
+    'soet-awards': {
+        title: 'SOET Best Project Award Ceremony 2026 Poster',
+        description: `
+            <h3>Project Overview</h3>
+            <p>Designed prize announcement poster and stage backdrop graphics for the School of Engineering & Technology (SOET) annual innovation showcase.</p>
+            
+            <h4>Visual Highlights</h4>
+            <ul>
+                <li><strong>3D Trophy Render:</strong> Golden prize cup with glowing particle effects highlighting the ₹10,000 prize pool.</li>
+                <li><strong>Student & Convener Badges:</strong> Structured convener & student coordinator profiles.</li>
+            </ul>
+        `
+    },
     'bi-dashboard': {
         title: 'BI Dashboard Builder',
         description: `
             <h3>Project Overview</h3>
-            <p>An automated business intelligence tool designed to bridge the gap between raw unstructured spreadsheets and interactive business analysis dashboards. Ideal for organizations seeking instant visualization assets without complex configurations.</p>
+            <p>An automated business intelligence tool designed to bridge raw unstructured spreadsheets and interactive business analysis dashboards.</p>
             
             <h4>Key Features</h4>
             <ul>
-                <li><strong>CSV / Excel Ingestion:</strong> Drag-and-drop raw records interface supporting custom table schemas.</li>
-                <li><strong>Automated Data Sanitizer:</strong> Detects and standardizes dates, addresses null records, matches values, and structures attributes.</li>
-                <li><strong>Dynamic Analytics Sandbox:</strong> Instantly generates key summaries, correlation coefficients, and trend charts.</li>
-                <li><strong>Responsive Dashboard Panel:</strong> High-performance chart filters to view breakdowns by dates, tags, and parameters.</li>
-            </ul>
-            
-            <h4>Technologies Used</h4>
-            <ul>
-                <li>TypeScript & HTML5 Canvas Engines</li>
-                <li>Pandas & NumPy ETL processing logic (mocked client-side)</li>
-                <li>ChartJS & D3 visualization layers</li>
-                <li>Vanilla CSS Custom Property systems</li>
+                <li>CSV / Excel Ingestion with drag-and-drop interface</li>
+                <li>Automated Data Sanitizer and Date Standardizer</li>
+                <li>Dynamic Analytics Sandbox & Trend Chart Generator</li>
             </ul>
         `
     },
@@ -429,21 +528,12 @@ const projectDetails = {
         title: 'AI Skin Disease Detector',
         description: `
             <h3>Project Overview</h3>
-            <p>An advanced computer vision diagnostic model developed to assist users, particularly in underserved regions, in scanning and evaluating dermatological conditions. Supported by publication findings in the <em>International Journal of Research and Publication Reviews (IJRPR)</em>.</p>
+            <p>Advanced computer vision diagnostic model published in the <em>International Journal of Research and Publication Reviews (IJRPR)</em> for dermatological evaluation.</p>
             
             <h4>Key Features</h4>
             <ul>
-                <li><strong>Computer Vision Diagnostician:</strong> Analyzes user skin photos to categorize dermatological conditions using Convolutional Neural Networks.</li>
-                <li><strong>Educational Triage Panel:</strong> Offers detailed overviews of identified conditions, guidance on home care steps, and severity level scales.</li>
-                <li><strong>Offline Care Guides:</strong> Access to wellness metrics and remedies for areas with poor internet connection.</li>
-            </ul>
-            
-            <h4>Technologies Used</h4>
-            <ul>
-                <li>Python & Jupyter Notebook environments</li>
-                <li>TensorFlow, Keras, and MobileNet v2 neural structures</li>
-                <li>OpenCV image preprocessing layers</li>
-                <li>Flask API middleware services</li>
+                <li>MobileNet v2 Convolutional Neural Network Architecture</li>
+                <li>OpenCV Preprocessing & Severity Triage Panel</li>
             </ul>
         `
     },
@@ -755,72 +845,368 @@ console.log('%cInterested in the code? Check out the repository on GitHub!', 'co
 console.log('%chttps://github.com/Devansh2305-code/Personal-Portfolio', 'color: #14b8a6; font-size: 12px;');
 
 // ==========================================
-// SECRET ADMIN CMS & GITHUB DIRECT SYNC ENGINE
+// INTERACTIVE PERSONA SWITCHER & CONTENT CMS
 // ==========================================
 
-const DEFAULT_PROJECTS = [
-    {
-        id: 'bi-dashboard',
-        title: 'BI Dashboard Builder',
-        category: 'data-analytics',
-        brief: 'Automated data sanitizer & business analytics dashboard generator for unstructured datasets.',
-        tags: ['TypeScript', 'Pandas', 'ChartJS', 'D3.js'],
-        link: 'https://github.com/Devansh2305-code/Personal-Portfolio',
-        hidden: false
+const PERSONA_CONFIG = {
+    'creative-designer': {
+        titleTag: "Creative Designer & Brand Identity Specialist",
+        description: "Specializing in visual identity, official university logos (DSW Emblem), promotional event standees, banners, social media campaigns (Starlit, Jasmine Sandlas concert), and brand publicity for mega fests like Solesta '26.",
+        stats: [
+            { number: "12+", label: "Design Assets" },
+            { number: "1", label: "DSW Official Logo" },
+            { number: "4+", label: "University Campaigns" }
+        ],
+        projects: [
+            {
+                id: 'dsw-logo',
+                title: 'DSW Official Logo & Brand Emblem',
+                category: 'brand-identity',
+                brief: 'Designed the official circular emblem for Department of Student Welfare, KRMU, featuring 10 custom activity icons representing student life.',
+                tags: ['Vector Art', 'Brand Emblem', 'Logo Design', 'DSW KRMU'],
+                link: '#',
+                persona: 'creative-designer',
+                hidden: false
+            },
+            {
+                id: 'solesta-26',
+                title: 'Solesta \'26 Annual Mega Fest Graphics',
+                category: 'event-branding',
+                brief: 'Complete visual identity, stage graphics, standees, and promotional banners for KRMU\'s flagship annual cultural fest Solesta \'26.',
+                tags: ['Fest Branding', 'Standee Graphics', 'Stage Poster', 'Solesta \'26'],
+                link: '#',
+                persona: 'creative-designer',
+                hidden: false
+            },
+            {
+                id: 'starlit-campaign',
+                title: 'Starlit Influencer Challenge Campaign',
+                category: 'campaign-design',
+                brief: 'Instagram Influencer Contest poster series, registration countdown graphics, and Jasmine Sandlas Meet & Greet publicity posters.',
+                tags: ['Campaign Design', 'Instagram Poster', 'Jasmine Sandlas', 'Social Media'],
+                link: '#',
+                persona: 'creative-designer',
+                hidden: false
+            },
+            {
+                id: 'prithvi-pulse',
+                title: 'Prithvi Pulse 1.0 & Official Certificate',
+                category: 'print-design',
+                brief: 'World Earth Day 2026 event suite including Chief Guest banners, Green Vichaar Sabha posters, and the official Certificate of Achievement.',
+                tags: ['Event Banner', 'Certificate Design', 'Youth Red Cross', 'Rotary Club'],
+                link: '#',
+                persona: 'creative-designer',
+                hidden: false
+            },
+            {
+                id: 'fit-fiesta',
+                title: 'Fit Fiesta 2.0 & Mr. & Ms. Fit Standee',
+                category: 'sports-design',
+                brief: 'Vertical standee and promotional banner suite featuring Mr. Rohit Yadav (2nd Runner Up Mr. India 2025) for Health Society.',
+                tags: ['Standee Design', 'Health Society', 'Mr. India Standee', 'Fitness Fest'],
+                link: '#',
+                persona: 'creative-designer',
+                hidden: false
+            },
+            {
+                id: 'yoga-day',
+                title: 'International Yoga Day 2026 Banner',
+                category: 'promotional-design',
+                brief: 'Zen-inspired promotional banner for DSW & National Service Scheme (NSS) collaboration at K.R. Mangalam University.',
+                tags: ['NSS Banner', 'Yoga Day', 'Zen Vector', 'DSW KRMU'],
+                link: '#',
+                persona: 'creative-designer',
+                hidden: false
+            },
+            {
+                id: 'japan-india-cdc',
+                title: 'Japan-India Academic Delegation Banner',
+                category: 'corporate-design',
+                brief: 'Official delegation welcoming banner for Career Development Centre (CDC), blending Indian & Japanese iconic landmarks.',
+                tags: ['Academic Banner', 'CDC KRMU', 'Indo-Japan', 'Landmark Vector'],
+                link: '#',
+                persona: 'creative-designer',
+                hidden: false
+            },
+            {
+                id: 'soet-awards',
+                title: 'SOET Best Project Award Ceremony Poster',
+                category: 'academic-design',
+                brief: 'Prize announcement poster and backdrop graphics for School of Engineering & Technology (SOET) annual innovation awards.',
+                tags: ['Award Ceremony', 'SOET KRMU', 'Poster Design', 'Trophy Vector'],
+                link: '#',
+                persona: 'creative-designer',
+                hidden: false
+            }
+        ],
+        skills: [
+            { id: 'cd-1', name: 'Adobe Illustrator & Vector Art', category: 'Graphic Design', icon: 'fas fa-pen-nib', level: 95 },
+            { id: 'cd-2', name: 'Photoshop & Media Editing', category: 'Media Design', icon: 'fas fa-image', level: 90 },
+            { id: 'cd-3', name: 'Brand Identity & Emblem Design', category: 'Branding', icon: 'fas fa-palette', level: 94 },
+            { id: 'cd-4', name: 'Event Standees & Banners', category: 'Print Media', icon: 'fas fa-scroll', level: 92 },
+            { id: 'cd-5', name: 'Social Media Campaigning', category: 'Marketing', icon: 'fas fa-bullhorn', level: 88 },
+            { id: 'cd-6', name: 'Figma & UI Layout Design', category: 'UI Design', icon: 'fab fa-figma', level: 85 }
+        ],
+        experience: [
+            {
+                id: 'exp-cd-1',
+                title: 'Lead Graphic & Creative Designer',
+                org: 'Department of Student Welfare (DSW), KRMU',
+                date: '2024 - Present',
+                desc: 'Designed official DSW Brand Logo, Solesta \'26 mega fest banners, Starlit influencer posters, and university event graphics for 10,000+ attendees.'
+            },
+            {
+                id: 'exp-cd-2',
+                title: 'Design Coordinator & Publicity Manager',
+                org: 'Environment & Health Societies, KRMU',
+                date: '2025 - Present',
+                desc: 'Authored complete visual branding for Prithvi Pulse 1.0, Fit Fiesta 2.0, International Yoga Day, and SOET Best Project Award Ceremonies.'
+            }
+        ]
     },
-    {
-        id: 'skin-detector',
-        title: 'AI Skin Disease Detector',
-        category: 'ai-ml',
-        brief: 'Deep learning diagnostic system published in IJRPR for identifying dermatological conditions.',
-        tags: ['Python', 'TensorFlow', 'MobileNet', 'OpenCV'],
-        link: 'https://github.com/Devansh2305-code/Personal-Portfolio',
-        hidden: false
+
+    'web-developer': {
+        titleTag: "Full-Stack Web Developer & UI/UX Architect",
+        description: "Building responsive, high-performance web applications, interactive portfolio engines, custom ETL dashboard UI sandboxes, and modern client-side software systems.",
+        stats: [
+            { number: "8+", label: "Web Repos" },
+            { number: "100%", label: "Responsive UI" },
+            { number: "Modern", label: "JS & TS Stack" }
+        ],
+        projects: [
+            {
+                id: 'bi-dashboard',
+                title: 'BI Dashboard Builder UI',
+                category: 'web-apps',
+                brief: 'Automated data sanitizer & business analytics dashboard generator for unstructured datasets with drag-and-drop CSV ingestion.',
+                tags: ['TypeScript', 'Canvas API', 'ChartJS', 'D3.js'],
+                link: 'https://github.com/Devansh2305-code/Personal-Portfolio',
+                persona: 'web-developer',
+                hidden: false
+            },
+            {
+                id: 'portfolio-engine',
+                title: 'Interactive Portfolio Platform',
+                category: 'web-apps',
+                brief: 'Custom client-side portfolio application featuring a 3D-inspired glassmorphic nav wheel, real-time CMS, and persona switcher.',
+                tags: ['JavaScript', 'Vanilla CSS', 'HTML5', 'LocalStorage'],
+                link: 'https://github.com/Devansh2305-code/Personal-Portfolio',
+                persona: 'web-developer',
+                hidden: false
+            },
+            {
+                id: 'ats-resume-ui',
+                title: 'ATS Resume Matcher UI',
+                category: 'web-apps',
+                brief: 'Web interface comparing resumes against job descriptions with interactive match percentage scoring & keyword heatmaps.',
+                tags: ['JavaScript', 'HTML5', 'Flask API', 'CSS Grid'],
+                link: 'https://github.com/Devansh2305-code/Personal-Portfolio',
+                persona: 'web-developer',
+                hidden: false
+            }
+        ],
+        skills: [
+            { id: 'wd-1', name: 'HTML5, CSS3 & Responsive Design', category: 'Frontend', icon: 'fab fa-html5', level: 95 },
+            { id: 'wd-2', name: 'JavaScript (ES6+) & DOM Engine', category: 'Core Logic', icon: 'fab fa-js', level: 92 },
+            { id: 'wd-3', name: 'TypeScript & Component Architecture', category: 'Frontend', icon: 'fas fa-code', level: 86 },
+            { id: 'wd-4', name: 'Canvas API & Micro-Animations', category: 'UI Interactivity', icon: 'fas fa-paint-brush', level: 88 },
+            { id: 'wd-5', name: 'Git, GitHub & Web Hosting', category: 'DevOps', icon: 'fab fa-github', level: 90 }
+        ],
+        experience: [
+            {
+                id: 'exp-wd-1',
+                title: 'Full-Stack Web Developer & UI Architect',
+                org: 'Personal & Client Projects',
+                date: '2023 - Present',
+                desc: 'Architected responsive web platforms, dynamic portfolio applications with embedded CMS engines, and interactive browser tools.'
+            }
+        ]
     },
-    {
-        id: 'resume-checker',
-        title: 'AI Resume Checker & Optimizer',
-        category: 'ai-ml',
-        brief: 'NLP-driven tool comparing resumes against job descriptions with ATS match scoring.',
-        tags: ['Python', 'NLP', 'Scikit-Learn', 'Flask'],
-        link: 'https://github.com/Devansh2305-code/Personal-Portfolio',
-        hidden: false
+
+    'data-engineer': {
+        titleTag: "Data Engineer & Machine Learning Specialist",
+        description: "Architecting data pipelines, processing complex unstructured datasets, building diagnostic computer vision models (IJRPR published), and automated BI analytics tools.",
+        stats: [
+            { number: "1", label: "IJRPR Publication" },
+            { number: "AI Model", label: "Skin Disease Detector" },
+            { number: "ETL", label: "Data Pipelines" }
+        ],
+        projects: [
+            {
+                id: 'skin-detector',
+                title: 'AI Skin Disease Detector',
+                category: 'ai-ml',
+                brief: 'Deep learning diagnostic system published in IJRPR for evaluating dermatological conditions using Convolutional Neural Networks.',
+                tags: ['Python', 'TensorFlow', 'MobileNet v2', 'OpenCV'],
+                link: 'https://github.com/Devansh2305-code/Personal-Portfolio',
+                persona: 'data-engineer',
+                hidden: false
+            },
+            {
+                id: 'bi-dashboard-etl',
+                title: 'Automated Data Sanitizer & ETL Engine',
+                category: 'data-analytics',
+                brief: 'Data pipeline tool detecting dates, null values, schema mismatches, and generating trend correlations from raw CSV records.',
+                tags: ['Python', 'Pandas', 'NumPy', 'Data Warehousing'],
+                link: 'https://github.com/Devansh2305-code/Personal-Portfolio',
+                persona: 'data-engineer',
+                hidden: false
+            },
+            {
+                id: 'resume-checker-nlp',
+                title: 'AI Resume Checker & ATS Matcher',
+                category: 'ai-ml',
+                brief: 'NLP-driven tool comparing candidate resumes against job descriptions with TF-IDF TF vector scoring.',
+                tags: ['Python', 'NLP', 'Scikit-Learn', 'Spacy'],
+                link: 'https://github.com/Devansh2305-code/Personal-Portfolio',
+                persona: 'data-engineer',
+                hidden: false
+            }
+        ],
+        skills: [
+            { id: 'de-1', name: 'Python & Data Science Stack', category: 'Language', icon: 'fab fa-python', level: 94 },
+            { id: 'de-2', name: 'TensorFlow, PyTorch & CNNs', category: 'Machine Learning', icon: 'fas fa-brain', level: 88 },
+            { id: 'de-3', name: 'SQL & Data Warehousing', category: 'Database', icon: 'fas fa-database', level: 86 },
+            { id: 'de-4', name: 'Pandas, NumPy & ETL Pipelines', category: 'Data Engineering', icon: 'fas fa-table', level: 92 },
+            { id: 'de-5', name: 'Power BI & Data Visualization', category: 'Analytics', icon: 'fas fa-chart-line', level: 90 }
+        ],
+        experience: [
+            {
+                id: 'exp-de-1',
+                title: 'AI & Healthcare Tech Researcher',
+                org: 'Research Scholar (IJRPR Publication Author)',
+                date: '2024 - Present',
+                desc: 'Author of published dermatological AI diagnostic research in IJRPR. Developed MobileNet v2 computer vision models and pre-processing pipelines.'
+            },
+            {
+                id: 'exp-de-2',
+                title: 'Data Analyst & Machine Learning Developer',
+                org: 'Independent Projects',
+                date: '2023 - Present',
+                desc: 'Built automated BI data sanitizers, ATS keyword evaluation algorithms, and SQL data models.'
+            }
+        ]
     }
-];
+};
 
-const DEFAULT_SKILLS = [
-    { id: 'sk-1', name: 'Python & Data Science', category: 'Language & Framework', icon: 'fab fa-python', level: 92 },
-    { id: 'sk-2', name: 'TensorFlow & PyTorch', category: 'Machine Learning', icon: 'fas fa-brain', level: 88 },
-    { id: 'sk-3', name: 'SQL & Data Warehousing', category: 'Database', icon: 'fas fa-database', level: 85 },
-    { id: 'sk-4', name: 'Power BI & Tableau', category: 'Analytics', icon: 'fas fa-chart-bar', level: 90 },
-    { id: 'sk-5', name: 'TypeScript / Web Dev', category: 'Frontend', icon: 'fab fa-js-square', level: 82 }
-];
-
-const DEFAULT_EXPERIENCE = [
-    {
-        id: 'exp-1',
-        title: 'AI & Healthcare Tech Researcher',
-        org: 'Research Scholar / Independent',
-        date: '2024 - Present',
-        desc: 'Author of published dermatological AI diagnostic research in IJRPR. Developing computer vision tools for automated healthcare accessibility.'
-    },
-    {
-        id: 'exp-2',
-        title: 'Data Analyst & Machine Learning Engineer',
-        org: 'Personal Portfolio Projects',
-        date: '2023 - Present',
-        desc: 'Architected automated BI Dashboard Builders, ATS Resume matchers, and predictive analytics tools using Python and SQL.'
-    }
-];
-
-let projectsState = JSON.parse(localStorage.getItem('portfolio_projects_data')) || DEFAULT_PROJECTS;
-let skillsState = JSON.parse(localStorage.getItem('portfolio_skills_data')) || DEFAULT_SKILLS;
-let experienceState = JSON.parse(localStorage.getItem('portfolio_experience_data')) || DEFAULT_EXPERIENCE;
+let currentPersona = localStorage.getItem('portfolio_current_persona') || 'creative-designer';
+let projectsState = JSON.parse(localStorage.getItem('portfolio_projects_data')) || PERSONA_CONFIG[currentPersona].projects;
+let skillsState = JSON.parse(localStorage.getItem('portfolio_skills_data')) || PERSONA_CONFIG[currentPersona].skills;
+let experienceState = JSON.parse(localStorage.getItem('portfolio_experience_data')) || PERSONA_CONFIG[currentPersona].experience;
 
 function saveAdminState() {
     localStorage.setItem('portfolio_projects_data', JSON.stringify(projectsState));
     localStorage.setItem('portfolio_skills_data', JSON.stringify(skillsState));
     localStorage.setItem('portfolio_experience_data', JSON.stringify(experienceState));
+    localStorage.setItem('portfolio_current_persona', currentPersona);
+}
+
+// Persona Switcher Controller
+function switchPersona(personaKey) {
+    if (!PERSONA_CONFIG[personaKey]) return;
+    currentPersona = personaKey;
+    localStorage.setItem('portfolio_current_persona', personaKey);
+
+    // Update active pill styling
+    document.querySelectorAll('.persona-pill').forEach(pill => {
+        if (pill.getAttribute('data-persona') === personaKey) {
+            pill.classList.add('active');
+        } else {
+            pill.classList.remove('active');
+        }
+    });
+
+    const config = PERSONA_CONFIG[personaKey];
+
+    // Update Hero Content
+    const subtitleEl = document.querySelector('.hero-subtitle');
+    const descEl = document.querySelector('.hero-description');
+    if (subtitleEl) subtitleEl.textContent = config.titleTag;
+    if (descEl) descEl.textContent = config.description;
+
+    // Update Hero Stats
+    const statsContainer = document.querySelector('.hero-stats');
+    if (statsContainer && config.stats) {
+        statsContainer.innerHTML = config.stats.map(s => `
+            <div class="stat-item">
+                <span class="stat-number">${s.number}</span>
+                <span class="stat-label">${s.label}</span>
+            </div>
+        `).join('');
+    }
+
+    // Set Active State
+    projectsState = config.projects;
+    skillsState = config.skills;
+    experienceState = config.experience;
+
+    // Re-render Page Elements
+    renderPortfolioProjects();
+    renderPortfolioSkills();
+    renderPortfolioExperience();
+    updateProjectFilterTabs(personaKey);
+}
+
+function updateProjectFilterTabs(personaKey) {
+    const filtersContainer = document.querySelector('.project-filters');
+    const subContainer = document.getElementById('projectSubdivision');
+
+    if (personaKey === 'creative-designer') {
+        const creativeFiltersHTML = `
+            <button class="filter-btn active" data-filter="all">All Works</button>
+            <button class="filter-btn" data-filter="brand-identity">Brand Identity</button>
+            <button class="filter-btn" data-filter="event-branding">Event Graphics</button>
+            <button class="filter-btn" data-filter="campaign-design">Campaigns</button>
+            <button class="filter-btn" data-filter="print-design">Print & Certificates</button>
+        `;
+        if (filtersContainer) filtersContainer.innerHTML = creativeFiltersHTML;
+        if (subContainer) {
+            subContainer.innerHTML = `
+                <button class="sub-btn active" data-filter="all">All Works</button>
+                <button class="sub-btn" data-filter="brand-identity">Brand Identity</button>
+                <button class="sub-btn" data-filter="event-branding">Event Graphics</button>
+                <button class="sub-btn" data-filter="campaign-design">Campaigns</button>
+            `;
+        }
+    } else if (personaKey === 'web-developer') {
+        const webFiltersHTML = `
+            <button class="filter-btn active" data-filter="all">All Projects</button>
+            <button class="filter-btn" data-filter="web-apps">Web Apps</button>
+        `;
+        if (filtersContainer) filtersContainer.innerHTML = webFiltersHTML;
+        if (subContainer) {
+            subContainer.innerHTML = `
+                <button class="sub-btn active" data-filter="all">All Projects</button>
+                <button class="sub-btn" data-filter="web-apps">Web Apps</button>
+            `;
+        }
+    } else {
+        const dataFiltersHTML = `
+            <button class="filter-btn active" data-filter="all">All Projects</button>
+            <button class="filter-btn" data-filter="ai-ml">AI & ML</button>
+            <button class="filter-btn" data-filter="data-analytics">Data Analytics</button>
+        `;
+        if (filtersContainer) filtersContainer.innerHTML = dataFiltersHTML;
+        if (subContainer) {
+            subContainer.innerHTML = `
+                <button class="sub-btn active" data-filter="all">All Projects</button>
+                <button class="sub-btn" data-filter="ai-ml">AI & ML</button>
+                <button class="sub-btn" data-filter="data-analytics">Data Analytics</button>
+            `;
+        }
+    }
+
+    // Re-bind filter click listeners
+    document.querySelectorAll('.filter-btn, .sub-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const filterVal = btn.getAttribute('data-filter');
+            document.querySelectorAll('.filter-btn, .sub-btn').forEach(b => {
+                if (b.getAttribute('data-filter') === filterVal) b.classList.add('active');
+                else b.classList.remove('active');
+            });
+            filterProjects(filterVal);
+        });
+    });
 }
 
 // Render dynamic projects on portfolio page
@@ -836,6 +1222,8 @@ function renderPortfolioProjects() {
         card.setAttribute('data-id', proj.id);
 
         const tagsHTML = (proj.tags || []).map(t => `<span class="tag">${t}</span>`).join('');
+        const btnIcon = proj.persona === 'creative-designer' ? 'fas fa-palette' : 'fab fa-github';
+        const btnText = proj.persona === 'creative-designer' ? 'View Work Details' : 'View Details';
 
         card.innerHTML = `
             <div class="project-header">
@@ -845,9 +1233,9 @@ function renderPortfolioProjects() {
             <p class="project-brief">${proj.brief}</p>
             <div class="project-tags">${tagsHTML}</div>
             <div class="project-footer">
-                <a href="${proj.link || '#'}" target="_blank" class="btn btn-secondary view-more-btn">
-                    <i class="fab fa-github"></i> View Details
-                </a>
+                <button class="btn btn-secondary view-more-btn" onclick="openProjectModal('${proj.id}')">
+                    <i class="${btnIcon}"></i> ${btnText}
+                </button>
             </div>
         `;
         grid.appendChild(card);
@@ -1081,10 +1469,17 @@ async function syncGithubRepos() {
 
 // Initialize Admin Control Panel Modal & Forms
 document.addEventListener('DOMContentLoaded', () => {
-    // Initial Render from State
-    renderPortfolioProjects();
-    renderPortfolioSkills();
-    renderPortfolioExperience();
+    // Initialize Persona Switcher Event Listeners
+    const personaPills = document.querySelectorAll('.persona-pill');
+    personaPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+            const persona = pill.getAttribute('data-persona');
+            switchPersona(persona);
+        });
+    });
+
+    // Apply active persona state on load
+    switchPersona(currentPersona);
 
     const secretAdminBtn = document.getElementById('secretAdminBtn');
     const adminModal = document.getElementById('adminModal');

@@ -32,9 +32,25 @@
             <div class="shape shape-3"></div>
         </div>
         <div class="container">
-            <div class="hero-brand">
+            <div class="hero-brand-bar">
                 <div class="logo">
                     <span class="logo-text">Devansh<span class="logo-dot">.</span></span>
+                </div>
+
+                <!-- Interactive "View Me As" Persona Switcher -->
+                <div class="persona-switcher" id="personaSwitcher">
+                    <span class="persona-label"><i class="fas fa-eye"></i> View Me As:</span>
+                    <div class="persona-pills">
+                        <button class="persona-pill active" data-persona="creative-designer" title="View Creative Design & Brand Identity Portfolio">
+                            <i class="fas fa-palette"></i> Creative Designer
+                        </button>
+                        <button class="persona-pill" data-persona="web-developer" title="View Full-Stack & Web Development Projects">
+                            <i class="fas fa-laptop-code"></i> Web Developer
+                        </button>
+                        <button class="persona-pill" data-persona="data-engineer" title="View Data Engineering, ETL & AI Models">
+                            <i class="fas fa-database"></i> Data Engineer
+                        </button>
+                    </div>
                 </div>
             </div>
             <div class="hero-content">
