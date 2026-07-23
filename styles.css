@@ -855,8 +855,8 @@ section {
 }
 
 .skill-icon {
-    font-size: 3.5rem;
-    margin-bottom: 20px;
+    font-size: 2.2rem;
+    margin-bottom: 14px;
     background: var(--gradient-primary);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -1057,9 +1057,9 @@ section {
 
 .project-number {
     position: absolute;
-    top: 25px;
-    right: 25px;
-    font-size: 3.5rem;
+    top: 20px;
+    right: 20px;
+    font-size: 2.2rem;
     font-weight: 800;
     background: var(--gradient-primary);
     -webkit-background-clip: text;
@@ -1185,16 +1185,16 @@ section {
 
 .publication-icon {
     flex-shrink: 0;
-    width: 80px;
-    height: 80px;
+    width: 56px;
+    height: 56px;
     background: var(--gradient-primary);
-    border-radius: 20px;
+    border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2.3rem;
+    font-size: 1.5rem;
     color: white;
-    box-shadow: 0 8px 20px var(--primary-glow);
+    box-shadow: 0 6px 16px var(--primary-glow);
 }
 
 .publication-content {
@@ -1317,24 +1317,24 @@ section {
 
 .cert-badge {
     position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
+    top: 15px;
+    right: 15px;
+    width: 38px;
+    height: 38px;
     background: var(--gradient-primary);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
-    font-size: 1.4rem;
-    box-shadow: 0 5px 15px var(--primary-glow);
+    font-size: 1rem;
+    box-shadow: 0 4px 12px var(--primary-glow);
     z-index: 2;
 }
 
 .cert-image {
     background: var(--gradient-glow);
-    padding: 50px 30px;
+    padding: 26px 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1343,12 +1343,12 @@ section {
 }
 
 .cert-icon {
-    font-size: 4.5rem;
+    font-size: 2.4rem;
     background: var(--gradient-accent);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: drop-shadow(0 4px 10px rgba(20, 184, 166, 0.2));
+    filter: drop-shadow(0 4px 8px rgba(20, 184, 166, 0.18));
 }
 
 .cert-content {
@@ -1824,12 +1824,7 @@ section {
     }
     
     .skill-icon {
-        font-size: 2.2rem;
-        margin-bottom: 12px;
-    }
-    
-    .skill-card h3 {
-        font-size: 0.95rem;
+        font-size: 1.6rem;
         margin-bottom: 8px;
     }
     
@@ -1902,9 +1897,9 @@ section {
     }
     
     .publication-icon {
-        width: 50px;
-        height: 50px;
-        font-size: 1.5rem;
+        width: 44px;
+        height: 44px;
+        font-size: 1.2rem;
         border-radius: 12px;
     }
     
@@ -1948,11 +1943,11 @@ section {
     }
     
     .cert-image {
-        padding: 30px 20px;
+        padding: 18px 14px;
     }
     
     .cert-icon {
-        font-size: 3rem;
+        font-size: 1.8rem;
     }
     
     .cert-content {
