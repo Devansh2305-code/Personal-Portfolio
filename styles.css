@@ -160,6 +160,66 @@ body::after {
     text-shadow: 0 0 10px var(--accent-glow);
 }
 
+/* Navigation Links & Hamburger Toggle */
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 1.8rem;
+    align-items: center;
+}
+
+.nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 4px 0;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--text-primary);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gradient-primary);
+    transition: width 0.3s ease;
+    border-radius: 2px;
+}
+
+.nav-link:hover::after, .nav-link.active::after {
+    width: 100%;
+}
+
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 26px;
+    height: 19px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1002;
+}
+
+.nav-toggle .bar {
+    width: 100%;
+    height: 2.5px;
+    background-color: var(--text-primary);
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
 /* Navigation Wheel Container */
 .nav-wheel-container {
     position: fixed;
@@ -398,12 +458,12 @@ body.wheel-dragging-active {
 /* Responsive Scaling for Wheel & Mobile Visibility */
 @media (max-width: 992px) {
     .nav-wheel-container {
-        width: 320px;
-        height: 320px;
-        right: -130px;
+        width: 300px;
+        height: 300px;
+        right: -120px;
     }
     .nav-wheel-item {
-        transform: translate(-50%, -50%) rotate(var(--angle)) translate(115px);
+        transform: translate(-50%, -50%) rotate(var(--angle)) translate(105px);
     }
     .nav-wheel-text {
         font-size: 0.82rem;
@@ -419,39 +479,47 @@ body.wheel-dragging-active {
 
 @media (max-width: 768px) {
     .container {
-        padding-right: 24px;
+        padding-right: 20px;
     }
     .nav-wheel-container {
-        width: 270px;
-        height: 270px;
-        right: -95px; /* Keeps 175px inside the viewport so labels are fully visible */
-        z-index: 1000;
+        width: 220px;
+        height: 220px;
+        right: -95px;
+        top: 60%;
+        z-index: 998;
+        pointer-events: none !important; /* Non-blocking for native touch scrolling */
+    }
+    .nav-wheel {
+        pointer-events: none !important;
     }
     .nav-wheel-item {
-        transform: translate(-50%, -50%) rotate(var(--angle)) translate(95px);
+        transform: translate(-50%, -50%) rotate(var(--angle)) translate(78px);
+        pointer-events: none;
     }
     .nav-wheel-text {
-        font-size: 0.78rem;
-        padding: 5px 10px;
-        background: rgba(255, 255, 255, 0.88);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(95, 111, 82, 0.18);
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        pointer-events: auto !important; /* Only clickable text labels capture taps */
+        font-size: 0.72rem;
+        padding: 4px 8px;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(95, 111, 82, 0.2);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
     .nav-wheel-marker {
-        left: -16px;
-        border-top: 8px solid transparent;
-        border-bottom: 8px solid transparent;
-        border-left: 14px solid var(--primary);
+        left: -12px;
+        border-top: 7px solid transparent;
+        border-bottom: 7px solid transparent;
+        border-left: 12px solid var(--primary);
+        pointer-events: none;
     }
     .project-subdivision {
-        right: 140px;
-        gap: 6px;
+        right: 115px;
+        gap: 5px;
     }
     .sub-btn {
-        padding: 6px 10px;
-        font-size: 0.72rem;
+        padding: 5px 8px;
+        font-size: 0.7rem;
     }
     .nav-wheel-tooltip {
         display: none;
@@ -460,25 +528,20 @@ body.wheel-dragging-active {
 
 @media (max-width: 480px) {
     .nav-wheel-container {
-        width: 240px;
-        height: 240px;
-        right: -85px; /* Keeps 155px inside screen on smartphones */
+        width: 190px;
+        height: 190px;
+        right: -85px;
+        top: 65%;
     }
     .nav-wheel-item {
-        transform: translate(-50%, -50%) rotate(var(--angle)) translate(85px);
+        transform: translate(-50%, -50%) rotate(var(--angle)) translate(68px);
     }
     .nav-wheel-text {
-        font-size: 0.72rem;
-        padding: 4px 8px;
-    }
-    .nav-wheel-marker {
-        left: -12px;
-        border-top: 7px solid transparent;
-        border-bottom: 7px solid transparent;
-        border-left: 12px solid var(--primary);
+        font-size: 0.68rem;
+        padding: 3px 7px;
     }
     .project-subdivision {
-        right: 125px;
+        right: 95px;
     }
 }
 

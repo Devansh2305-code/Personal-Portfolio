@@ -1,5 +1,9 @@
-// Navigation Bar Scroll Effect (Logo bar)
+// Navigation Bar Scroll Effect & Mobile Hamburger Menu
 const navbar = document.getElementById('navbar');
+const navToggle = document.getElementById('navToggle');
+const navMenu = document.getElementById('navMenu');
+const navLinks = document.querySelectorAll('.nav-link');
+
 window.addEventListener('scroll', () => {
     if (window.scrollY > 80) {
         navbar.classList.add('scrolled');
@@ -7,6 +11,21 @@ window.addEventListener('scroll', () => {
         navbar.classList.remove('scrolled');
     }
 });
+
+if (navToggle && navMenu) {
+    navToggle.addEventListener('click', () => {
+        navToggle.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    });
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            navToggle.classList.remove('active');
+            navMenu.classList.remove('active');
+        });
+    });
+}
+
 
 // Navigation Wheel Elements
 const navWheel = document.getElementById('navWheel');
@@ -135,33 +154,35 @@ if (navWheelContainer) {
         startWheelDrag(e);
     });
 
-    // Touch Event Listeners for Mobile Double-tap & Hold / Drag
+    // Touch Event Listeners for Mobile Double-tap & Hold / Drag (Non-blocking for normal scrolling)
     let lastTouchTime = 0;
     navWheelContainer.addEventListener('touchstart', (e) => {
         const now = Date.now();
-        if (now - lastTouchTime < 400 || e.touches.length > 1) {
-            e.preventDefault();
-            startWheelDrag(e);
-        } else {
+        if (now - lastTouchTime < 400 && e.touches.length === 1) {
+            // Only activate drag on intentional double-tap & hold
             startWheelDrag(e);
         }
         lastTouchTime = now;
-    }, { passive: false });
+    }, { passive: true });
 
     navWheelContainer.addEventListener('touchmove', (e) => {
         if (isWheelDragging) {
-            e.preventDefault();
+            e.preventDefault(); // Only prevent default if double-tap drag mode is explicitly active
             const touch = e.touches[0];
             updateWheelFromPointer(touch.clientX, touch.clientY);
         }
     }, { passive: false });
 
     navWheelContainer.addEventListener('touchend', () => {
-        stopWheelDrag();
+        if (isWheelDragging) {
+            stopWheelDrag();
+        }
     });
 
     navWheelContainer.addEventListener('touchcancel', () => {
-        stopWheelDrag();
+        if (isWheelDragging) {
+            stopWheelDrag();
+        }
     });
 }
 
