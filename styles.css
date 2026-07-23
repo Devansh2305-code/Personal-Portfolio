@@ -260,13 +260,11 @@ body::after {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.65);
-    border: 2px solid rgba(95, 111, 82, 0.12);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    box-shadow: 
-        0 0 40px rgba(95, 111, 82, 0.12), 
-        inset 0 0 30px rgba(255, 255, 255, 0.8);
+    background: transparent !important;
+    border: 1.5px dashed rgba(95, 111, 82, 0.25);
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
     position: relative;
     transform: rotate(var(--wheel-rotation));
     transition: transform 0.6s cubic-bezier(0.25, 1, 0.3, 1);
@@ -279,7 +277,7 @@ body::after {
     position: absolute;
     inset: 15px;
     border-radius: 50%;
-    border: 1.5px dashed rgba(95, 111, 82, 0.15);
+    border: 1px dotted rgba(95, 111, 82, 0.2);
     animation: wheel-spin-slow 80s linear infinite;
     pointer-events: none;
 }
@@ -959,8 +957,8 @@ section {
 }
 
 .skill-icon {
-    font-size: 2.2rem;
-    margin-bottom: 14px;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
     background: var(--gradient-primary);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -1161,16 +1159,21 @@ section {
 
 .project-number {
     position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 2.2rem;
+    top: 15px;
+    right: 15px;
+    font-size: 1.1rem;
     font-weight: 800;
     background: var(--gradient-primary);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    opacity: 0.08;
+    opacity: 0.12;
     user-select: none;
+}
+
+.project-card i,
+.view-more-btn i {
+    font-size: 0.75rem !important;
 }
 
 .project-card::before {

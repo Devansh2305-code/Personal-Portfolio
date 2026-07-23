@@ -1140,6 +1140,16 @@ function switchPersona(personaKey) {
     skillsState = config.skills;
     experienceState = config.experience;
 
+    // Toggle Experience Section visibility (hidden for Creative Designer)
+    const expSection = document.getElementById('experience');
+    if (expSection) {
+        if (personaKey === 'creative-designer') {
+            expSection.style.display = 'none';
+        } else {
+            expSection.style.display = 'block';
+        }
+    }
+
     // Re-render Page Elements
     renderPortfolioProjects();
     renderPortfolioSkills();
