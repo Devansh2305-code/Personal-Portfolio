@@ -2066,3 +2066,306 @@ section {
     opacity: 1;
     transform: translate(0) scale(1) rotate(0);
 }
+
+/* Secret Admin Trigger */
+.secret-admin-trigger {
+    cursor: pointer;
+    display: inline-block;
+    transition: color 0.3s ease, transform 0.3s ease;
+    user-select: none;
+    font-weight: 800;
+    padding: 0 2px;
+}
+
+.secret-admin-trigger:hover {
+    color: var(--primary);
+    transform: scale(1.6);
+    text-shadow: 0 0 12px var(--primary-glow);
+}
+
+/* Secret Admin Modal Specific Styles */
+.admin-modal-content {
+    max-width: 880px;
+    padding: 32px;
+    background: #ffffff;
+    border-radius: 24px;
+    box-shadow: 0 25px 70px rgba(42, 52, 41, 0.25);
+}
+
+.admin-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1.5px solid var(--border-color);
+    padding-bottom: 18px;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.admin-header-title {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.admin-header-title i {
+    font-size: 2rem;
+    color: var(--primary);
+}
+
+.admin-header-title h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.2;
+}
+
+.admin-subtitle {
+    display: block;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.admin-badge {
+    background: var(--gradient-primary);
+    color: white;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px var(--primary-glow);
+}
+
+.admin-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.btn-admin-reset {
+    background: rgba(201, 74, 74, 0.08);
+    color: var(--error);
+    border: 1px solid rgba(201, 74, 74, 0.3);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-admin-reset:hover {
+    background: var(--error);
+    color: white;
+    border-color: transparent;
+}
+
+/* Admin Tabs */
+.admin-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 22px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 12px;
+    overflow-x: auto;
+}
+
+.admin-tab-btn {
+    padding: 10px 18px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-base);
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.88rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.admin-tab-btn.active {
+    background: var(--gradient-primary);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 4px 15px var(--primary-glow);
+}
+
+.admin-tab-content {
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.admin-tab-content.active {
+    display: flex;
+}
+
+/* Admin Box Containers */
+.admin-box {
+    background: var(--bg-base);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 20px;
+}
+
+.admin-box h3 {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+}
+
+.admin-box p {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+}
+
+.admin-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+.admin-form-grid .full-width {
+    grid-column: span 2;
+}
+
+.admin-form-inline {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.admin-form-inline input {
+    flex: 1;
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 1.5px solid var(--border-color);
+    font-size: 0.92rem;
+}
+
+.btn-sync-github {
+    padding: 12px 20px;
+    white-space: nowrap;
+}
+
+.sync-status-msg {
+    margin-top: 12px;
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+.sync-status-msg.success { color: var(--success); }
+.sync-status-msg.error { color: var(--error); }
+.sync-status-msg.loading { color: var(--accent); }
+
+/* Admin List Items */
+.admin-items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 280px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.admin-item-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    padding: 12px 16px;
+    border-radius: 14px;
+    gap: 12px;
+    transition: all 0.2s ease;
+}
+
+.admin-item-row:hover {
+    border-color: var(--primary);
+    box-shadow: 0 4px 12px rgba(95, 111, 82, 0.08);
+}
+
+.admin-item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.admin-item-info strong {
+    font-size: 0.95rem;
+    color: var(--text-primary);
+}
+
+.admin-item-info span {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.admin-item-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-item-action {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-base);
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+}
+
+.btn-item-action:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.btn-item-action.delete:hover {
+    background: var(--error);
+    color: white;
+    border-color: transparent;
+}
+
+.btn-item-action.toggle-hidden.is-hidden {
+    opacity: 0.5;
+    background: #e2e8f0;
+}
+
+@media (max-width: 600px) {
+    .admin-modal-content {
+        padding: 20px 14px;
+        margin: 5% 10px;
+    }
+    .admin-form-grid {
+        grid-template-columns: 1fr;
+    }
+    .admin-form-grid .full-width {
+        grid-column: span 1;
+    }
+    .admin-form-inline {
+        flex-direction: column;
+    }
+    .admin-form-inline input,
+    .btn-sync-github {
+        width: 100%;
+    }
+}

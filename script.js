@@ -753,3 +753,479 @@ if (observeElements.length > 0) {
 console.log('%c🚀 Welcome to Devansh\'s Portfolio!', 'color: #6366f1; font-size: 20px; font-weight: bold;');
 console.log('%cInterested in the code? Check out the repository on GitHub!', 'color: #a855f7; font-size: 14px;');
 console.log('%chttps://github.com/Devansh2305-code/Personal-Portfolio', 'color: #14b8a6; font-size: 12px;');
+
+// ==========================================
+// SECRET ADMIN CMS & GITHUB DIRECT SYNC ENGINE
+// ==========================================
+
+const DEFAULT_PROJECTS = [
+    {
+        id: 'bi-dashboard',
+        title: 'BI Dashboard Builder',
+        category: 'data-analytics',
+        brief: 'Automated data sanitizer & business analytics dashboard generator for unstructured datasets.',
+        tags: ['TypeScript', 'Pandas', 'ChartJS', 'D3.js'],
+        link: 'https://github.com/Devansh2305-code/Personal-Portfolio',
+        hidden: false
+    },
+    {
+        id: 'skin-detector',
+        title: 'AI Skin Disease Detector',
+        category: 'ai-ml',
+        brief: 'Deep learning diagnostic system published in IJRPR for identifying dermatological conditions.',
+        tags: ['Python', 'TensorFlow', 'MobileNet', 'OpenCV'],
+        link: 'https://github.com/Devansh2305-code/Personal-Portfolio',
+        hidden: false
+    },
+    {
+        id: 'resume-checker',
+        title: 'AI Resume Checker & Optimizer',
+        category: 'ai-ml',
+        brief: 'NLP-driven tool comparing resumes against job descriptions with ATS match scoring.',
+        tags: ['Python', 'NLP', 'Scikit-Learn', 'Flask'],
+        link: 'https://github.com/Devansh2305-code/Personal-Portfolio',
+        hidden: false
+    }
+];
+
+const DEFAULT_SKILLS = [
+    { id: 'sk-1', name: 'Python & Data Science', category: 'Language & Framework', icon: 'fab fa-python', level: 92 },
+    { id: 'sk-2', name: 'TensorFlow & PyTorch', category: 'Machine Learning', icon: 'fas fa-brain', level: 88 },
+    { id: 'sk-3', name: 'SQL & Data Warehousing', category: 'Database', icon: 'fas fa-database', level: 85 },
+    { id: 'sk-4', name: 'Power BI & Tableau', category: 'Analytics', icon: 'fas fa-chart-bar', level: 90 },
+    { id: 'sk-5', name: 'TypeScript / Web Dev', category: 'Frontend', icon: 'fab fa-js-square', level: 82 }
+];
+
+const DEFAULT_EXPERIENCE = [
+    {
+        id: 'exp-1',
+        title: 'AI & Healthcare Tech Researcher',
+        org: 'Research Scholar / Independent',
+        date: '2024 - Present',
+        desc: 'Author of published dermatological AI diagnostic research in IJRPR. Developing computer vision tools for automated healthcare accessibility.'
+    },
+    {
+        id: 'exp-2',
+        title: 'Data Analyst & Machine Learning Engineer',
+        org: 'Personal Portfolio Projects',
+        date: '2023 - Present',
+        desc: 'Architected automated BI Dashboard Builders, ATS Resume matchers, and predictive analytics tools using Python and SQL.'
+    }
+];
+
+let projectsState = JSON.parse(localStorage.getItem('portfolio_projects_data')) || DEFAULT_PROJECTS;
+let skillsState = JSON.parse(localStorage.getItem('portfolio_skills_data')) || DEFAULT_SKILLS;
+let experienceState = JSON.parse(localStorage.getItem('portfolio_experience_data')) || DEFAULT_EXPERIENCE;
+
+function saveAdminState() {
+    localStorage.setItem('portfolio_projects_data', JSON.stringify(projectsState));
+    localStorage.setItem('portfolio_skills_data', JSON.stringify(skillsState));
+    localStorage.setItem('portfolio_experience_data', JSON.stringify(experienceState));
+}
+
+// Render dynamic projects on portfolio page
+function renderPortfolioProjects() {
+    const grid = document.querySelector('.projects-grid');
+    if (!grid) return;
+
+    grid.innerHTML = '';
+    projectsState.filter(p => !p.hidden).forEach(proj => {
+        const card = document.createElement('div');
+        card.className = 'project-card';
+        card.setAttribute('data-category', proj.category);
+        card.setAttribute('data-id', proj.id);
+
+        const tagsHTML = (proj.tags || []).map(t => `<span class="tag">${t}</span>`).join('');
+
+        card.innerHTML = `
+            <div class="project-header">
+                <h3>${proj.title}</h3>
+                <span class="project-badge">${proj.category.toUpperCase().replace('-', ' ')}</span>
+            </div>
+            <p class="project-brief">${proj.brief}</p>
+            <div class="project-tags">${tagsHTML}</div>
+            <div class="project-footer">
+                <a href="${proj.link || '#'}" target="_blank" class="btn btn-secondary view-more-btn">
+                    <i class="fab fa-github"></i> View Details
+                </a>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+
+    // Re-bind card spotlight glare effect
+    document.querySelectorAll('.project-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.boxShadow = `0 15px 35px rgba(95, 111, 82, 0.12), radial-gradient(800px circle at ${x}px ${y}px, rgba(95, 111, 82, 0.05), transparent 40%)`;
+        });
+        card.addEventListener('mouseleave', () => { card.style.boxShadow = ''; });
+    });
+}
+
+// Render skills dynamically
+function renderPortfolioSkills() {
+    const grid = document.querySelector('.skills-grid');
+    if (!grid) return;
+
+    grid.innerHTML = '';
+    skillsState.forEach(skill => {
+        const card = document.createElement('div');
+        card.className = 'skill-card';
+        card.innerHTML = `
+            <i class="${skill.icon || 'fas fa-code'} skill-icon"></i>
+            <h3>${skill.name}</h3>
+            <span class="skill-category">${skill.category || 'Skill'}</span>
+            <div class="skill-progress">
+                <div class="progress-bar" style="width: ${skill.level || 80}%"></div>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+// Render experience dynamically
+function renderPortfolioExperience() {
+    const timeline = document.querySelector('.timeline');
+    if (!timeline) return;
+
+    timeline.innerHTML = '';
+    experienceState.forEach((exp, index) => {
+        const item = document.createElement('div');
+        item.className = 'timeline-item';
+        item.setAttribute('data-aos', index % 2 === 0 ? 'fade-right' : 'fade-left');
+
+        item.innerHTML = `
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">${exp.date}</span>
+                <h3>${exp.title}</h3>
+                <h4>${exp.org}</h4>
+                <p>${exp.desc}</p>
+            </div>
+        `;
+        timeline.appendChild(item);
+    });
+}
+
+// Render list items in Admin Management Panel
+function renderAdminLists() {
+    const projList = document.getElementById('adminProjectsList');
+    const skillList = document.getElementById('adminSkillsList');
+    const expList = document.getElementById('adminExperienceList');
+
+    if (projList) {
+        projList.innerHTML = projectsState.map(p => `
+            <div class="admin-item-row">
+                <div class="admin-item-info">
+                    <strong>${p.title} ${p.hidden ? '<small style="color:var(--error)">(Hidden)</small>' : ''}</strong>
+                    <span>Cat: ${p.category} | Tags: ${(p.tags || []).join(', ')}</span>
+                </div>
+                <div class="admin-item-actions">
+                    <button class="btn-item-action toggle-hidden ${p.hidden ? 'is-hidden' : ''}" onclick="toggleProjectVisibility('${p.id}')" title="Toggle Visibility">
+                        <i class="fas ${p.hidden ? 'fa-eye-slash' : 'fa-eye'}"></i>
+                    </button>
+                    <button class="btn-item-action delete" onclick="deleteProject('${p.id}')" title="Delete Project">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    if (skillList) {
+        skillList.innerHTML = skillsState.map(s => `
+            <div class="admin-item-row">
+                <div class="admin-item-info">
+                    <strong><i class="${s.icon}"></i> ${s.name}</strong>
+                    <span>Level: ${s.level}% | Cat: ${s.category}</span>
+                </div>
+                <div class="admin-item-actions">
+                    <button class="btn-item-action delete" onclick="deleteSkill('${s.id}')" title="Delete Skill">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    if (expList) {
+        expList.innerHTML = experienceState.map(e => `
+            <div class="admin-item-row">
+                <div class="admin-item-info">
+                    <strong>${e.title} @ ${e.org}</strong>
+                    <span>${e.date}</span>
+                </div>
+                <div class="admin-item-actions">
+                    <button class="btn-item-action delete" onclick="deleteExperience('${e.id}')" title="Delete Experience">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        `).join('');
+    }
+}
+
+// Global action handlers for window scope
+window.toggleProjectVisibility = function(id) {
+    projectsState = projectsState.map(p => p.id === id ? { ...p, hidden: !p.hidden } : p);
+    saveAdminState();
+    renderPortfolioProjects();
+    renderAdminLists();
+};
+
+window.deleteProject = function(id) {
+    if (confirm('Delete this project from portfolio?')) {
+        projectsState = projectsState.filter(p => p.id !== id);
+        saveAdminState();
+        renderPortfolioProjects();
+        renderAdminLists();
+    }
+};
+
+window.deleteSkill = function(id) {
+    if (confirm('Delete this skill?')) {
+        skillsState = skillsState.filter(s => s.id !== id);
+        saveAdminState();
+        renderPortfolioSkills();
+        renderAdminLists();
+    }
+};
+
+window.deleteExperience = function(id) {
+    if (confirm('Delete this experience timeline item?')) {
+        experienceState = experienceState.filter(e => e.id !== id);
+        saveAdminState();
+        renderPortfolioExperience();
+        renderAdminLists();
+    }
+};
+
+// DIRECT GITHUB API AUTO-SYNC
+async function syncGithubRepos() {
+    const usernameInput = document.getElementById('githubUsernameInput');
+    const statusMsg = document.getElementById('syncStatusMsg');
+    const username = usernameInput ? usernameInput.value.trim() : 'Devansh2305-code';
+
+    if (!username) {
+        if (statusMsg) statusMsg.innerHTML = '<span class="sync-status-msg error">Please enter a valid GitHub username.</span>';
+        return;
+    }
+
+    if (statusMsg) statusMsg.innerHTML = '<span class="sync-status-msg loading"><i class="fas fa-spinner fa-spin"></i> Fetching repositories from GitHub...</span>';
+
+    try {
+        const res = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=30`);
+        if (!res.ok) throw new Error(`GitHub API returned status ${res.status}`);
+        
+        const repos = await res.json();
+        const nonForks = repos.filter(r => !r.fork);
+
+        if (nonForks.length === 0) {
+            if (statusMsg) statusMsg.innerHTML = '<span class="sync-status-msg error">No public repositories found for this account.</span>';
+            return;
+        }
+
+        let addedCount = 0;
+        nonForks.forEach(repo => {
+            const formattedTitle = repo.name
+                .replace(/[-_]/g, ' ')
+                .replace(/\b\w/g, char => char.toUpperCase());
+
+            const descLower = (repo.description || '').toLowerCase();
+            let category = 'web-apps';
+            if (descLower.includes('ai') || descLower.includes('ml') || descLower.includes('skin') || descLower.includes('model') || descLower.includes('neural')) {
+                category = 'ai-ml';
+            } else if (descLower.includes('data') || descLower.includes('dashboard') || descLower.includes('analytics') || descLower.includes('bi')) {
+                category = 'data-analytics';
+            }
+
+            const primaryLang = repo.language || 'GitHub';
+            const tags = [primaryLang, 'GitHub API'];
+            if (repo.stargazers_count > 0) tags.push(`⭐ ${repo.stargazers_count}`);
+
+            const existingIndex = projectsState.findIndex(p => p.id === repo.name || p.link === repo.html_url);
+            const projectObj = {
+                id: repo.name,
+                title: formattedTitle,
+                category: category,
+                brief: repo.description || `Open-source ${primaryLang} repository built by ${username}.`,
+                tags: tags,
+                link: repo.html_url,
+                hidden: false
+            };
+
+            if (existingIndex >= 0) {
+                projectsState[existingIndex] = { ...projectsState[existingIndex], ...projectObj };
+            } else {
+                projectsState.unshift(projectObj);
+                addedCount++;
+            }
+        });
+
+        saveAdminState();
+        renderPortfolioProjects();
+        renderAdminLists();
+
+        if (statusMsg) {
+            statusMsg.innerHTML = `<span class="sync-status-msg success"><i class="fas fa-check-circle"></i> Successfully synced ${nonForks.length} repositories (${addedCount} new added)!</span>`;
+        }
+    } catch (err) {
+        if (statusMsg) {
+            statusMsg.innerHTML = `<span class="sync-status-msg error"><i class="fas fa-exclamation-triangle"></i> Sync Failed: ${err.message}</span>`;
+        }
+    }
+}
+
+// Initialize Admin Control Panel Modal & Forms
+document.addEventListener('DOMContentLoaded', () => {
+    // Initial Render from State
+    renderPortfolioProjects();
+    renderPortfolioSkills();
+    renderPortfolioExperience();
+
+    const secretAdminBtn = document.getElementById('secretAdminBtn');
+    const adminModal = document.getElementById('adminModal');
+    const closeAdminModal = document.getElementById('closeAdminModal');
+    const syncGithubBtn = document.getElementById('syncGithubBtn');
+    const resetAdminDataBtn = document.getElementById('resetAdminDataBtn');
+
+    // Secret Admin Open Trigger
+    if (secretAdminBtn && adminModal) {
+        secretAdminBtn.addEventListener('click', () => {
+            adminModal.style.display = 'flex';
+            renderAdminLists();
+        });
+    }
+
+    if (closeAdminModal && adminModal) {
+        closeAdminModal.addEventListener('click', () => {
+            adminModal.style.display = 'none';
+        });
+    }
+
+    // Admin Tab Navigation
+    const tabBtns = document.querySelectorAll('.admin-tab-btn');
+    const tabContents = document.querySelectorAll('.admin-tab-content');
+
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const targetTab = btn.getAttribute('data-tab');
+            tabBtns.forEach(b => b.classList.remove('active'));
+            tabContents.forEach(c => c.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById(targetTab)?.classList.add('active');
+        });
+    });
+
+    // GitHub Sync Click Handler
+    if (syncGithubBtn) {
+        syncGithubBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            syncGithubRepos();
+        });
+    }
+
+    // Reset Defaults Handler
+    if (resetAdminDataBtn) {
+        resetAdminDataBtn.addEventListener('click', () => {
+            if (confirm('Are you sure you want to reset all portfolio content to original defaults?')) {
+                localStorage.removeItem('portfolio_projects_data');
+                localStorage.removeItem('portfolio_skills_data');
+                localStorage.removeItem('portfolio_experience_data');
+                projectsState = DEFAULT_PROJECTS;
+                skillsState = DEFAULT_SKILLS;
+                experienceState = DEFAULT_EXPERIENCE;
+                saveAdminState();
+                renderPortfolioProjects();
+                renderPortfolioSkills();
+                renderPortfolioExperience();
+                renderAdminLists();
+                alert('Portfolio content reset to default state.');
+            }
+        });
+    }
+
+    // Add Custom Project Form Handler
+    const addProjectForm = document.getElementById('addProjectForm');
+    if (addProjectForm) {
+        addProjectForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const title = document.getElementById('projTitle').value.trim();
+            const category = document.getElementById('projCategory').value;
+            const brief = document.getElementById('projBrief').value.trim();
+            const tagsInput = document.getElementById('projTags').value.trim();
+            const link = document.getElementById('projLink').value.trim();
+
+            const tags = tagsInput ? tagsInput.split(',').map(t => t.trim()) : ['Custom Project'];
+            const newProject = {
+                id: 'custom-' + Date.now(),
+                title,
+                category,
+                brief,
+                tags,
+                link: link || 'https://github.com/Devansh2305-code',
+                hidden: false
+            };
+
+            projectsState.unshift(newProject);
+            saveAdminState();
+            renderPortfolioProjects();
+            renderAdminLists();
+            addProjectForm.reset();
+        });
+    }
+
+    // Add Custom Skill Form Handler
+    const addSkillForm = document.getElementById('addSkillForm');
+    if (addSkillForm) {
+        addSkillForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('skillName').value.trim();
+            const icon = document.getElementById('skillIcon').value.trim() || 'fas fa-code';
+            const level = parseInt(document.getElementById('skillLevel').value) || 85;
+
+            const newSkill = {
+                id: 'sk-' + Date.now(),
+                name,
+                category: 'Custom Skill',
+                icon,
+                level
+            };
+
+            skillsState.push(newSkill);
+            saveAdminState();
+            renderPortfolioSkills();
+            renderAdminLists();
+            addSkillForm.reset();
+        });
+    }
+
+    // Add Custom Experience Form Handler
+    const addExperienceForm = document.getElementById('addExperienceForm');
+    if (addExperienceForm) {
+        addExperienceForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const title = document.getElementById('expTitle').value.trim();
+            const org = document.getElementById('expOrg').value.trim();
+            const date = document.getElementById('expDate').value.trim();
+            const desc = document.getElementById('expDesc').value.trim();
+
+            const newExp = {
+                id: 'exp-' + Date.now(),
+                title,
+                org,
+                date,
+                desc
+            };
+
+            experienceState.unshift(newExp);
+            saveAdminState();
+            renderPortfolioExperience();
+            renderAdminLists();
+            addExperienceForm.reset();
+        });
+    }
+});

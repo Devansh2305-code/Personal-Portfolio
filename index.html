@@ -548,17 +548,172 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Devansh Jain. All rights reserved.</p>
+                <p>&copy; 2026 Devansh Jain<span class="secret-admin-trigger" id="secretAdminBtn" title="⚡ Admin Dashboard">.</span> All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Project Modal -->
+    <!-- Project Details Modal -->
     <div class="modal" id="projectModal">
         <div class="modal-content">
             <span class="close-modal" aria-label="Close details modal">&times;</span>
             <h2 id="modalTitle"></h2>
             <div id="modalDescription"></div>
+        </div>
+    </div>
+
+    <!-- Secret Admin Control Panel Modal -->
+    <div class="modal admin-modal" id="adminModal">
+        <div class="modal-content admin-modal-content">
+            <div class="admin-modal-header">
+                <div class="admin-header-title">
+                    <i class="fas fa-user-shield"></i>
+                    <div>
+                        <h2>Portfolio Control Panel</h2>
+                        <span class="admin-subtitle">Live Content CMS & GitHub Sync</span>
+                    </div>
+                    <span class="admin-badge">Admin Mode</span>
+                </div>
+                <div class="admin-header-actions">
+                    <button class="btn-admin-reset" id="resetAdminDataBtn" title="Reset all data to defaults">
+                        <i class="fas fa-undo"></i> Reset Defaults
+                    </button>
+                    <span class="close-modal" id="closeAdminModal" aria-label="Close Admin Modal">&times;</span>
+                </div>
+            </div>
+
+            <!-- Admin Navigation Tabs -->
+            <div class="admin-tabs">
+                <button class="admin-tab-btn active" data-tab="tab-projects">
+                    <i class="fas fa-folder-open"></i> Projects & GitHub Sync
+                </button>
+                <button class="admin-tab-btn" data-tab="tab-skills">
+                    <i class="fas fa-code"></i> Skills Manager
+                </button>
+                <button class="admin-tab-btn" data-tab="tab-experience">
+                    <i class="fas fa-briefcase"></i> Experience Manager
+                </button>
+            </div>
+
+            <!-- Tab 1: Projects & GitHub Direct Sync -->
+            <div class="admin-tab-content active" id="tab-projects">
+                <!-- GitHub Direct Auto-Sync Box -->
+                <div class="admin-box github-sync-box">
+                    <div class="box-header">
+                        <h3><i class="fab fa-github"></i> Direct Sync from GitHub</h3>
+                        <p>Fetch public repositories directly from your GitHub profile and add/update them live in your portfolio.</p>
+                    </div>
+                    <div class="admin-form-inline">
+                        <input type="text" id="githubUsernameInput" value="Devansh2305-code" placeholder="GitHub Username">
+                        <button class="btn btn-primary btn-sync-github" id="syncGithubBtn">
+                            <i class="fas fa-sync-alt"></i> Fetch & Sync Repos
+                        </button>
+                    </div>
+                    <div class="sync-status-msg" id="syncStatusMsg"></div>
+                </div>
+
+                <!-- Add Custom Project Form -->
+                <div class="admin-box">
+                    <h3><i class="fas fa-plus-circle"></i> Add Custom Project</h3>
+                    <form id="addProjectForm" class="admin-form-grid">
+                        <div class="form-group">
+                            <label for="projTitle">Project Title</label>
+                            <input type="text" id="projTitle" required placeholder="e.g. HealthTech Diagnostic Model">
+                        </div>
+                        <div class="form-group">
+                            <label for="projCategory">Category</label>
+                            <select id="projCategory">
+                                <option value="ai-ml">AI & ML</option>
+                                <option value="data-analytics">Data Analytics</option>
+                                <option value="web-apps">Web Apps</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="projBrief">Short Overview / Description</label>
+                            <input type="text" id="projBrief" required placeholder="1-2 sentences outlining features and objectives">
+                        </div>
+                        <div class="form-group">
+                            <label for="projTags">Tech Stack (comma separated)</label>
+                            <input type="text" id="projTags" placeholder="Python, TensorFlow, Flask, Canvas">
+                        </div>
+                        <div class="form-group">
+                            <label for="projLink">GitHub / Live Demo URL</label>
+                            <input type="url" id="projLink" placeholder="https://github.com/Devansh2305-code/...">
+                        </div>
+                        <div class="form-group full-width">
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Save Project</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Displayed Projects Management -->
+                <div class="admin-box">
+                    <h3><i class="fas fa-list-ul"></i> Manage Displayed Projects</h3>
+                    <div class="admin-items-list" id="adminProjectsList"></div>
+                </div>
+            </div>
+
+            <!-- Tab 2: Skills Manager -->
+            <div class="admin-tab-content" id="tab-skills">
+                <div class="admin-box">
+                    <h3><i class="fas fa-plus-circle"></i> Add New Skill</h3>
+                    <form id="addSkillForm" class="admin-form-grid">
+                        <div class="form-group">
+                            <label for="skillName">Skill Name</label>
+                            <input type="text" id="skillName" required placeholder="e.g. PyTorch / Deep Learning">
+                        </div>
+                        <div class="form-group">
+                            <label for="skillIcon">FontAwesome Icon Class</label>
+                            <input type="text" id="skillIcon" placeholder="fab fa-python or fas fa-brain" value="fas fa-brain">
+                        </div>
+                        <div class="form-group">
+                            <label for="skillLevel">Proficiency Level (%)</label>
+                            <input type="number" id="skillLevel" min="10" max="100" value="85">
+                        </div>
+                        <div class="form-group full-width">
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Add Skill</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="admin-box">
+                    <h3><i class="fas fa-layer-group"></i> Manage Current Skills</h3>
+                    <div class="admin-items-list" id="adminSkillsList"></div>
+                </div>
+            </div>
+
+            <!-- Tab 3: Experience Manager -->
+            <div class="admin-tab-content" id="tab-experience">
+                <div class="admin-box">
+                    <h3><i class="fas fa-plus-circle"></i> Add Experience Milestone</h3>
+                    <form id="addExperienceForm" class="admin-form-grid">
+                        <div class="form-group">
+                            <label for="expTitle">Role Title</label>
+                            <input type="text" id="expTitle" required placeholder="e.g. AI Research Scholar">
+                        </div>
+                        <div class="form-group">
+                            <label for="expOrg">Company / Organization</label>
+                            <input type="text" id="expOrg" required placeholder="e.g. Healthcare Innovation Lab">
+                        </div>
+                        <div class="form-group">
+                            <label for="expDate">Date Range</label>
+                            <input type="text" id="expDate" required placeholder="e.g. Jan 2025 - Present">
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="expDesc">Description / Key Milestones</label>
+                            <textarea id="expDesc" rows="3" placeholder="Overview of contributions and accomplishments"></textarea>
+                        </div>
+                        <div class="form-group full-width">
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Add Experience</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="admin-box">
+                    <h3><i class="fas fa-history"></i> Manage Timeline Experience</h3>
+                    <div class="admin-items-list" id="adminExperienceList"></div>
+                </div>
+            </div>
         </div>
     </div>
 
