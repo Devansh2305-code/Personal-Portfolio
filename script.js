@@ -1,34 +1,6 @@
-// Navigation Bar Scroll Effect & Mobile Hamburger Menu
-const navbar = document.getElementById('navbar');
-const navToggle = document.getElementById('navToggle');
-const navMenu = document.getElementById('navMenu');
-const navLinks = document.querySelectorAll('.nav-link');
-
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 80) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
-    }
-});
-
-if (navToggle && navMenu) {
-    navToggle.addEventListener('click', () => {
-        navToggle.classList.toggle('active');
-        navMenu.classList.toggle('active');
-    });
-
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            navToggle.classList.remove('active');
-            navMenu.classList.remove('active');
-        });
-    });
-}
-
-
 // Navigation Wheel Elements
 const navWheel = document.getElementById('navWheel');
+const navWheelContainer = document.getElementById('navWheelContainer');
 const navWheelItems = document.querySelectorAll('.nav-wheel-item');
 const projectSubdivision = document.getElementById('projectSubdivision');
 const subBtns = document.querySelectorAll('.sub-btn');
@@ -261,7 +233,7 @@ navWheelItems.forEach(item => {
         const targetSection = document.getElementById(sectionId);
         if (targetSection) {
             window.scrollTo({
-                top: targetSection.offsetTop - 80,
+                top: targetSection.offsetTop - 20,
                 behavior: 'smooth'
             });
         }
