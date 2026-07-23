@@ -267,8 +267,69 @@ body::after {
     border-left: 16px solid var(--primary);
     filter: drop-shadow(0 0 8px var(--primary-glow));
     z-index: 1001;
-    animation: marker-pulse 2s infinite alternate ease-in-out;
 }
+
+/* Dragging / Double-click Hold State */
+body.wheel-dragging-active {
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    cursor: grabbing !important;
+}
+
+.nav-wheel-container {
+    cursor: grab;
+    touch-action: none;
+}
+
+.nav-wheel-container.dragging {
+    cursor: grabbing !important;
+}
+
+.nav-wheel-container.dragging .nav-wheel {
+    box-shadow: 
+        0 0 50px rgba(95, 111, 82, 0.45), 
+        inset 0 0 40px rgba(255, 255, 255, 0.95);
+    border-color: var(--primary);
+    transition: none !important;
+}
+
+.nav-wheel-container.dragging .nav-wheel-text {
+    transition: none !important;
+}
+
+.nav-wheel-container.dragging .nav-wheel-marker {
+    border-left-color: var(--accent);
+    filter: drop-shadow(0 0 15px var(--accent-glow));
+    transform: translateY(-50%) scale(1.25);
+}
+
+/* Floating Tooltip Hint */
+.nav-wheel-tooltip {
+    position: absolute;
+    left: -210px;
+    top: 50%;
+    transform: translateY(-50%) translateX(10px);
+    background: rgba(42, 52, 41, 0.92);
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 20px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    white-space: nowrap;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.18);
+    backdrop-filter: blur(8px);
+    z-index: 1002;
+}
+
+.nav-wheel-container:hover .nav-wheel-tooltip,
+.nav-wheel-container.dragging .nav-wheel-tooltip {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+}
+
 
 @keyframes marker-pulse {
     0% { transform: translateY(-50%) scale(1); filter: drop-shadow(0 0 6px var(--accent-glow)); }
@@ -334,45 +395,90 @@ body::after {
     transform: translateX(-5px);
 }
 
-/* Responsive Scaling for Wheel */
+/* Responsive Scaling for Wheel & Mobile Visibility */
 @media (max-width: 992px) {
     .nav-wheel-container {
-        width: 340px;
-        height: 340px;
-        right: -170px;
+        width: 320px;
+        height: 320px;
+        right: -130px;
     }
     .nav-wheel-item {
-        transform: translate(-50%, -50%) rotate(var(--angle)) translate(120px);
+        transform: translate(-50%, -50%) rotate(var(--angle)) translate(115px);
     }
     .nav-wheel-text {
-        font-size: 0.85rem;
+        font-size: 0.82rem;
         padding: 6px 12px;
     }
     .project-subdivision {
-        right: 190px;
+        right: 170px;
+    }
+    .nav-wheel-tooltip {
+        left: -180px;
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+    .container {
+        padding-right: 24px;
+    }
     .nav-wheel-container {
-        width: 220px;
-        height: 220px;
-        right: -110px;
+        width: 270px;
+        height: 270px;
+        right: -95px; /* Keeps 175px inside the viewport so labels are fully visible */
+        z-index: 1000;
     }
     .nav-wheel-item {
-        transform: translate(-50%, -50%) rotate(var(--angle)) translate(78px);
+        transform: translate(-50%, -50%) rotate(var(--angle)) translate(95px);
     }
     .nav-wheel-text {
-        font-size: 0.7rem;
-        padding: 4px 8px;
+        font-size: 0.78rem;
+        padding: 5px 10px;
+        background: rgba(255, 255, 255, 0.88);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(95, 111, 82, 0.18);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    }
+    .nav-wheel-marker {
+        left: -16px;
+        border-top: 8px solid transparent;
+        border-bottom: 8px solid transparent;
+        border-left: 14px solid var(--primary);
     }
     .project-subdivision {
-        right: 120px;
+        right: 140px;
         gap: 6px;
     }
     .sub-btn {
-        padding: 6px 12px;
-        font-size: 0.7rem;
+        padding: 6px 10px;
+        font-size: 0.72rem;
+    }
+    .nav-wheel-tooltip {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-wheel-container {
+        width: 240px;
+        height: 240px;
+        right: -85px; /* Keeps 155px inside screen on smartphones */
+    }
+    .nav-wheel-item {
+        transform: translate(-50%, -50%) rotate(var(--angle)) translate(85px);
+    }
+    .nav-wheel-text {
+        font-size: 0.72rem;
+        padding: 4px 8px;
+    }
+    .nav-wheel-marker {
+        left: -12px;
+        border-top: 7px solid transparent;
+        border-bottom: 7px solid transparent;
+        border-left: 12px solid var(--primary);
+    }
+    .project-subdivision {
+        right: 125px;
     }
 }
 
@@ -1962,26 +2068,7 @@ section {
         font-size: 1.1rem;
     }
     
-    .nav-wheel-container {
-        width: 220px;
-        height: 220px;
-        right: -110px;
-    }
-    .nav-wheel-item {
-        transform: translate(-50%, -50%) rotate(var(--angle)) translate(78px);
-    }
-    .nav-wheel-text {
-        font-size: 0.7rem;
-        padding: 4px 8px;
-    }
-    .project-subdivision {
-        right: 120px;
-        gap: 6px;
-    }
-    .sub-btn {
-        padding: 6px 12px;
-        font-size: 0.7rem;
-    }
+
 }
 
 /* Animations hooks */

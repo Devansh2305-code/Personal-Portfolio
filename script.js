@@ -28,8 +28,165 @@ const rotationMap = {
 
 const sections = document.querySelectorAll('section, header');
 
+// Add tooltip hint to navigation wheel container
+if (navWheelContainer && !document.querySelector('.nav-wheel-tooltip')) {
+    const tooltip = document.createElement('div');
+    tooltip.className = 'nav-wheel-tooltip';
+    tooltip.textContent = '⚡ Double-click & hold curve to move cursor';
+    navWheelContainer.appendChild(tooltip);
+}
+
+let isWheelDragging = false;
+let lastWheelClickTime = 0;
+
+// Update wheel rotation & scroll position continuous mapping from pointer
+function updateWheelFromPointer(clientX, clientY) {
+    if (!navWheelContainer || !navWheel) return;
+
+    const rect = navWheelContainer.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    // Calculate vertical offset relative to wheel center
+    const maxRange = rect.height * 0.42;
+    let normalizedY = (clientY - centerY) / maxRange;
+    normalizedY = Math.max(-1, Math.min(1, normalizedY));
+
+    // Map Y position to target rotation (-90deg at bottom, +90deg at top)
+    const targetRotation = -normalizedY * 90;
+
+    // Direct continuous update to wheel style
+    navWheel.style.setProperty('--wheel-rotation', `${targetRotation}deg`);
+
+    // Synchronize page scroll position linearly with wheel rotation
+    const scrollProgress = (90 - targetRotation) / 180; // 0 (top) to 1 (bottom)
+    const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    const targetScrollY = scrollProgress * maxScroll;
+
+    window.scrollTo({
+        top: targetScrollY,
+        behavior: 'auto'
+    });
+
+    // Dynamically update active section label based on closest angle
+    let currentSection = 'home';
+    let minDiff = Infinity;
+    Object.keys(rotationMap).forEach(sec => {
+        const diff = Math.abs(rotationMap[sec] - targetRotation);
+        if (diff < minDiff) {
+            minDiff = diff;
+            currentSection = sec;
+        }
+    });
+
+    navWheelItems.forEach(item => {
+        if (item.getAttribute('data-section') === currentSection) {
+            item.classList.add('active');
+        } else {
+            item.classList.remove('active');
+        }
+    });
+
+    if (currentSection === 'projects') {
+        if (projectSubdivision) projectSubdivision.classList.add('visible');
+    } else {
+        if (projectSubdivision) projectSubdivision.classList.remove('visible');
+    }
+}
+
+function startWheelDrag(e) {
+    isWheelDragging = true;
+    if (navWheelContainer) {
+        navWheelContainer.classList.add('dragging');
+    }
+    document.body.classList.add('wheel-dragging-active');
+    
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    updateWheelFromPointer(clientX, clientY);
+}
+
+function stopWheelDrag() {
+    if (!isWheelDragging) return;
+    isWheelDragging = false;
+
+    if (navWheelContainer) {
+        navWheelContainer.classList.remove('dragging');
+    }
+    document.body.classList.remove('wheel-dragging-active');
+
+    handleScroll();
+}
+
+// Mouse Event Listeners for Double-click & Hold / Drag
+if (navWheelContainer) {
+    navWheelContainer.addEventListener('mousedown', (e) => {
+        const now = Date.now();
+        // Check for double click interval (< 380ms)
+        if (now - lastWheelClickTime < 380) {
+            e.preventDefault();
+            startWheelDrag(e);
+        }
+        lastWheelClickTime = now;
+    });
+
+    navWheelContainer.addEventListener('dblclick', (e) => {
+        e.preventDefault();
+        startWheelDrag(e);
+    });
+
+    // Touch Event Listeners for Mobile Double-tap & Hold / Drag
+    let lastTouchTime = 0;
+    navWheelContainer.addEventListener('touchstart', (e) => {
+        const now = Date.now();
+        if (now - lastTouchTime < 400 || e.touches.length > 1) {
+            e.preventDefault();
+            startWheelDrag(e);
+        } else {
+            startWheelDrag(e);
+        }
+        lastTouchTime = now;
+    }, { passive: false });
+
+    navWheelContainer.addEventListener('touchmove', (e) => {
+        if (isWheelDragging) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            updateWheelFromPointer(touch.clientX, touch.clientY);
+        }
+    }, { passive: false });
+
+    navWheelContainer.addEventListener('touchend', () => {
+        stopWheelDrag();
+    });
+
+    navWheelContainer.addEventListener('touchcancel', () => {
+        stopWheelDrag();
+    });
+}
+
+// Global Mouse move & up listeners to keep dragging smooth even outside container
+window.addEventListener('mousemove', (e) => {
+    if (isWheelDragging) {
+        if (e.buttons === 0) {
+            stopWheelDrag();
+            return;
+        }
+        e.preventDefault();
+        updateWheelFromPointer(e.clientX, e.clientY);
+    }
+});
+
+window.addEventListener('mouseup', () => {
+    if (isWheelDragging) {
+        stopWheelDrag();
+    }
+});
+
 // Set active link scroll-spy and rotate wheel
 function handleScroll() {
+    if (isWheelDragging) return;
+
     let currentSection = 'home';
     
     sections.forEach(section => {
@@ -78,6 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Handle clicking on wheel items to scroll to corresponding section
 navWheelItems.forEach(item => {
     item.addEventListener('click', () => {
+        if (isWheelDragging) return;
         const sectionId = item.getAttribute('data-section');
         const targetSection = document.getElementById(sectionId);
         if (targetSection) {
